@@ -43,7 +43,7 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ORDER BY ")]
+        [global::System.Configuration.DefaultSettingValueAttribute(" ORDER BY ")]
         public string OrderBy {
             get {
                 return ((string)(this["OrderBy"]));

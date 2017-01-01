@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RentalMovies.Domain.Records;
+using RentalMovies.Domain.Tables;
+using RentalMovies.GUI;
+using RentalMovies.HelperClasses;
+using System;
 using System.Windows.Forms;
 
 namespace RentalMovies
 {
     public partial class Users : Base
     {
+        private UsersTable usersTable;
+
         public Users()
         {
             InitializeComponent();
+            usersTable = new UsersTable();
+            usersTable.SetObjConnect(ref objConnect);
         }
 
         private void Users_Load(object sender, EventArgs e)
@@ -28,38 +29,23 @@ namespace RentalMovies
             UsersListView.Columns.Add("Nazwisko", -2, HorizontalAlignment.Left);
             UsersListView.Columns.Add("Login", -2, HorizontalAlignment.Left);
             UsersListView.Columns.Add("Rola", -2, HorizontalAlignment.Left);
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+
+            GUITools.FillList(ref UsersListView, usersTable.GetSortedUserList(this.FindCheckedUserRadioButton(), null), new User(), "Error: FillUserList");
+
             this.ResizeUserListView();
 
-            UserJobTextBox2.BeginUpdate();
-            UserJobTextBox2.Items.Add("Kasjer");
-            UserJobTextBox2.Items.Add("Edytor");
-            UserJobTextBox2.Items.Add("Admin");
-            UserJobTextBox2.Items.Add("Manager");
-            UserJobTextBox2.EndUpdate();
-            UserJobTextBox2.SetSelected(0, true);
+            GUITools.LoadRoles(ref UserJobTextBox2, Role.getRoles());
         }
+
 
         private void FillUserList(String c)
         {
-            try
-            {
-                this.objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedUserRadioButton();
-                System.Data.DataSet dataSet = objConnect.GetConnection;
-                var userList = dataSet.Tables[0].Rows;
+           //database
+           this.objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedUserRadioButton();
+           System.Data.DataSet dataSet = objConnect.GetConnection;
+           var userList = dataSet.Tables[0].Rows;
 
-                UsersListView.Items.Clear();
-                User user;
-                foreach (DataRow row in userList)
-                {
-                    user = new User(row);
-                    this.UsersListView.Items.Add(new ListViewItem(new[] { user.userID.Trim(), user.forename, user.surname, user.login, user.job }));
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message + " Error: FillUserList");
-            }
+            GUITools.FillList(ref UsersListView, userList, new User(), "Error: FillUserList");
         }
 
         private string FindCheckedUserRadioButton()
@@ -125,12 +111,12 @@ namespace RentalMovies
                 this.objConnect.Sql = c;
                 System.Data.DataSet dataSet = objConnect.GetConnection;
                 User user = new User(dataSet.Tables[0].Rows[0]);
-                UserIDTextBox2.Text = user.userID;
-                UserNameTextBox2.Text = user.forename;
-                UserSurnameTextBox2.Text = user.surname;
-                UserLoginTextBox2.Text = user.login;
-                UserPasswordTextBox2.Text = user.password;
-                UserJobTextBox2.Text = user.job;
+                UserIDTextBox2.Text = user.UserID;
+                UserNameTextBox2.Text = user.Forename;
+                UserSurnameTextBox2.Text = user.Surname;
+                UserLoginTextBox2.Text = user.Login;
+                UserPasswordTextBox2.Text = user.Password;
+                UserJobTextBox2.Text = user.Job;
             }
             catch (Exception f)
             {
@@ -145,35 +131,35 @@ namespace RentalMovies
 
         private void SortUserByNameAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+            this.FillUserList(Properties.Resources.SelectAllFromUsers);
         }
 
         private void SortUserByNameDesc_CheckedChanged(object sender, EventArgs e)
         {
-//            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+//            this.FillUserList(Properties.Resources.SelectAllFromUsers);
+            this.FillUserList(Properties.Resources.SelectAllFromUsers);
 
         }
 
         private void SortUserBySurnameAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+            this.FillUserList(Properties.Resources.SelectAllFromUsers);
 
         }
 
         private void SortUserBySurnameDesc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+            this.FillUserList(Properties.Resources.SelectAllFromUsers);
         }
 
         private void SortUserByJobAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+            this.FillUserList(Properties.Resources.SelectAllFromUsers);
         }
 
         private void SortUserByJobDesc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+            this.FillUserList(Properties.Resources.SelectAllFromUsers);
         }
 
         private void AddUserButton_Click(object sender, EventArgs e)
@@ -183,7 +169,7 @@ namespace RentalMovies
             {
                 try
                 {
-                    this.objConnect.Sql = Properties.Settings.Default.SelectAllFromUsers;
+                    this.objConnect.Sql = Properties.Resources.SelectAllFromUsers;
                     System.Data.DataSet dataSet = objConnect.GetConnection;
                     var dataTable = dataSet.Tables[0];
                     var row = dataTable.NewRow();
@@ -195,7 +181,7 @@ namespace RentalMovies
                     row[5] = UserJobTextBox2.Text.Trim();
                     dataTable.Rows.Add(row);
                     objConnect.UpdateDatabase(dataSet);
-                    this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+                    this.FillUserList(Properties.Resources.SelectAllFromUsers);
                     this.ResizeUserListView();
                 }
                 catch (Exception f)
@@ -227,7 +213,7 @@ namespace RentalMovies
                         dataSet.Tables[0].Rows[0].Delete();
                         objConnect.UpdateDatabase(dataSet);
                         this.ResetUser();
-                        this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+                        this.FillUserList(Properties.Resources.SelectAllFromUsers);
                         this.ResizeUserListView();
                     }
                     catch (Exception f)
@@ -260,7 +246,7 @@ namespace RentalMovies
                         row[5] = UserJobTextBox2.Text.Trim();
                         row.EndEdit();
                         objConnect.UpdateDatabase(dataSet);
-                        this.FillUserList(Properties.Settings.Default.SelectAllFromUsers);
+                        this.FillUserList(Properties.Resources.SelectAllFromUsers);
                         this.ResizeUserListView();
                     }
                     catch (Exception f)

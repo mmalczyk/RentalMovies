@@ -1,0 +1,1 @@
+SELECT * FROM Users WHERE login=? AND password=?

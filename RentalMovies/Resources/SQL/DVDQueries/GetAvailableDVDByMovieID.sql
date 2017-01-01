@@ -1,0 +1,1 @@
+SELECT dvdid FROM DVDs WHERE status = "Dostepny" AND movieid = ?

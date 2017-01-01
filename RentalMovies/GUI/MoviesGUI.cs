@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using RentalMovies.Domain.Records;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RentalMovies
@@ -17,7 +12,7 @@ namespace RentalMovies
         public Movies(User user)
         {
             InitializeComponent();
-            if (user.job.CompareTo("Manager") == 0 || user.job.CompareTo("Edytor") == 0)
+            if (user.Job.CompareTo("Manager") == 0 || user.Job.CompareTo("Edytor") == 0)
             {
                 FindButton.Enabled = true;
                 DirectorTextBox.Enabled = false;

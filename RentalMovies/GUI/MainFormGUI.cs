@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.IO;
+using RentalMovies.Domain.Records;
 
 namespace RentalMovies
 {
@@ -104,7 +97,7 @@ namespace RentalMovies
                     //Zalogowany; przydzielanie uprawnień
                     User user = new User(dataSet.Tables[0].Rows[0]);
                     this.user = user;
-                    if (user.job.CompareTo("Edytor") == 0)
+                    if (user.Job.CompareTo("Edytor") == 0)
                     {
                         MoviesButton.Enabled = true;
                         CustomersButton.Enabled = false;
@@ -113,7 +106,7 @@ namespace RentalMovies
                         AdministrationButton.Enabled = false;
                         MyAccountButton.Enabled = true;
                     }
-                    if (user.job.CompareTo("Kasjer") == 0)
+                    if (user.Job.CompareTo("Kasjer") == 0)
                     {
                         MoviesButton.Enabled = true;
                         CustomersButton.Enabled = true;
@@ -123,7 +116,7 @@ namespace RentalMovies
                         MyAccountButton.Enabled = true;
 
                     }
-                    if (user.job.CompareTo("Manager") == 0)
+                    if (user.Job.CompareTo("Manager") == 0)
                     {
                         MoviesButton.Enabled = true;
                         CustomersButton.Enabled = true;
@@ -133,7 +126,7 @@ namespace RentalMovies
                         MyAccountButton.Enabled = true;
 
                     }
-                    if (user.job.CompareTo("Admin") == 0)
+                    if (user.Job.CompareTo("Admin") == 0)
                     {
                         MoviesButton.Enabled = false;
                         CustomersButton.Enabled = false;

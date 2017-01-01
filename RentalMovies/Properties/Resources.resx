@@ -118,7 +118,91 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CountDVDsByStatus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\dvdqueries\countdvdsbystatus.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="Database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Database.mdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GetAllRentingRecord" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\rentingrecord\getallrentingrecord.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="GetAvailableDVDByMovieID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\dvdqueries\getavailabledvdbymovieid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="GetLimits" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\otherqueries\getlimits.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="GetMovieTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\moviequeries\getmovietitle.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="GetRentingRecordByCustomerID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\rentingrecord\getrentingrecordbycustomerid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="GetTransactionByID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\rentingrecord\gettransactionbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="GetTransactionsByDVDID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\rentingrecord\gettransactionsbydvdid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="NewID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\otherqueries\newid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SearchCustomers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\customers\searchcustomers.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SearchMoviesWithTheseTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\moviequeries\searchmovieswiththesetags.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SearchTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\searchtags.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectAllDVDs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\dvdqueries\selectalldvds.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectAllFromCustomers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\customers\selectallfromcustomers.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectAllFromMovies" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\moviequeries\selectallfrommovies.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectAllFromUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\users\selectallfromusers.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectAllMoviesTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selectallmoviestags.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectAllTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selectalltags.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectCustomerById" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\customers\selectcustomerbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectDVDByMovieID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\dvdqueries\selectdvdbymovieid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectDVDsByID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\dvdqueries\selectdvdsbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectMovieByID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\moviequeries\selectmoviebyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectMoviesTagsByMovieID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selectmoviestagsbymovieid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectMoviesTagsByTagAndMovieId" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selectmoviestagsbytagandmovieid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectTagByID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selecttagbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectTagsByMovieID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selecttagsbymovieid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\users\selectuser.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="SelectUserById" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\users\selectuserbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
 </root>

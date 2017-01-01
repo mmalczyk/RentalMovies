@@ -1,0 +1,1 @@
+SELECT * FROM RentingRecord WHERE dvdid = [id]

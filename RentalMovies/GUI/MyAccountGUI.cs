@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RentalMovies.Domain.Records;
+using System;
 using System.Windows.Forms;
 
 namespace RentalMovies
 {
     public partial class MyAccount : Base
     {
-        User user;
+        private User user;
 
         public MyAccount(User user)
         {
@@ -34,11 +28,11 @@ namespace RentalMovies
 
         private void FillUserBoxes()
         {
-            UserIDTextBox.Text = user.userID;
-            UserNameTextBox.Text = user.forename;
-            UserSurnameTextBox.Text = user.surname;
-            UserLoginTextBox.Text = user.login;
-            UserJobTextBox.Text = user.job;
+            UserIDTextBox.Text = user.UserID;
+            UserNameTextBox.Text = user.Forename;
+            UserSurnameTextBox.Text = user.Surname;
+            UserLoginTextBox.Text = user.Login;
+            UserJobTextBox.Text = user.Job;
         }
 
         private void SavePasswordButton_Click(object sender, EventArgs e)
@@ -48,7 +42,7 @@ namespace RentalMovies
             {
                 try
                 {
-                    this.objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[password]", CurrentPasswordTextBox.Text).Replace("[login]", user.login);
+                    this.objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[password]", CurrentPasswordTextBox.Text).Replace("[login]", user.Login);
                     System.Data.DataSet dataSet = objConnect.GetConnection;
                     if (dataSet.Tables[0].Rows.Count == 0) PasswordChangeLabel.Text = "Błędne stare hasło";
                     else

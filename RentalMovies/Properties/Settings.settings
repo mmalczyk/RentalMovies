@@ -9,7 +9,7 @@
       <Value Profile="(Default)">SELECT * FROM Users WHERE login='[login]' AND password='[password]';</Value>
     </Setting>
     <Setting Name="OrderBy" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ORDER BY </Value>
+      <Value Profile="(Default)"> ORDER BY </Value>
     </Setting>
     <Setting Name="SelectUserByID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM Users WHERE userId='[id]'</Value>

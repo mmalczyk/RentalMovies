@@ -1,0 +1,1 @@
+Select Cast(Cast(newid() AS binary(3)) AS int) as NextID

@@ -59,100 +59,111 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\Administration.cs">
+    <Compile Include="Domain\Tables\DataTableObject.cs" />
+    <Compile Include="Domain\Tables\UsersTable.cs" />
+    <Compile Include="GUI\AdministrationGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Administration.Designer.cs">
-      <DependentUpon>Administration.cs</DependentUpon>
+    <Compile Include="GUI\AdministrationGUI.Designer.cs">
+      <DependentUpon>AdministrationGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Base.cs">
+    <Compile Include="GUI\BaseGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Base.Designer.cs">
-      <DependentUpon>Base.cs</DependentUpon>
+    <Compile Include="GUI\BaseGUI.Designer.cs">
+      <DependentUpon>BaseGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Borrow.cs">
+    <Compile Include="GUI\BorrowGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Borrow.Designer.cs">
-      <DependentUpon>Borrow.cs</DependentUpon>
+    <Compile Include="GUI\BorrowGUI.Designer.cs">
+      <DependentUpon>BorrowGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Customers.cs">
+    <Compile Include="GUI\CustomersGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Customers.Designer.cs">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <Compile Include="GUI\CustomersGUI.Designer.cs">
+      <DependentUpon>CustomersGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\GUITools.cs" />
+    <Compile Include="Domain\Records\ActiveRecord.cs" />
     <Compile Include="HelperClasses\DatabaseConnection.cs" />
     <Compile Include="HelperClasses\Limits.cs" />
-    <Compile Include="GUI\Tag.cs">
+    <Compile Include="GUI\TagGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Tag.Designer.cs">
-      <DependentUpon>Tag.cs</DependentUpon>
+    <Compile Include="GUI\TagGUI.Designer.cs">
+      <DependentUpon>TagGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MainForm.cs">
+    <Compile Include="GUI\MainFormGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="GUI\MainFormGUI.Designer.cs">
+      <DependentUpon>MainFormGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Movies.cs">
+    <Compile Include="GUI\MoviesGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Movies.Designer.cs">
-      <DependentUpon>Movies.cs</DependentUpon>
+    <Compile Include="GUI\MoviesGUI.Designer.cs">
+      <DependentUpon>MoviesGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MovieSearch.cs">
+    <Compile Include="GUI\MovieSearchGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\MovieSearch.Designer.cs">
-      <DependentUpon>MovieSearch.cs</DependentUpon>
+    <Compile Include="GUI\MovieSearchGUI.Designer.cs">
+      <DependentUpon>MovieSearchGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MyAccount.cs">
+    <Compile Include="GUI\MyAccountGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\MyAccount.Designer.cs">
-      <DependentUpon>MyAccount.cs</DependentUpon>
+    <Compile Include="GUI\MyAccountGUI.Designer.cs">
+      <DependentUpon>MyAccountGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\Role.cs" />
+    <Compile Include="HelperClasses\RoleType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\Tags.cs">
+    <Compile Include="GUI\TagsGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Tags.Designer.cs">
-      <DependentUpon>Tags.cs</DependentUpon>
+    <Compile Include="GUI\TagsGUI.Designer.cs">
+      <DependentUpon>TagsGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperClasses\User.cs" />
-    <Compile Include="GUI\Users.cs">
+    <Compile Include="Domain\Records\User.cs" />
+    <Compile Include="GUI\UsersGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Users.Designer.cs">
-      <DependentUpon>Users.cs</DependentUpon>
+    <Compile Include="GUI\UsersGUI.Designer.cs">
+      <DependentUpon>UsersGUI.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="GUI\Administration.resx">
-      <DependentUpon>Administration.cs</DependentUpon>
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="GUI\AdministrationGUI.resx">
+      <DependentUpon>AdministrationGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Borrow.resx">
-      <DependentUpon>Borrow.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\BorrowGUI.resx">
+      <DependentUpon>BorrowGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Customers.resx">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\CustomersGUI.resx">
+      <DependentUpon>CustomersGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Tag.resx">
-      <DependentUpon>Tag.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\TagGUI.resx">
+      <DependentUpon>TagGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\MainFormGUI.resx">
+      <DependentUpon>MainFormGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Movies.resx">
-      <DependentUpon>Movies.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\MoviesGUI.resx">
+      <DependentUpon>MoviesGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\MovieSearch.resx">
-      <DependentUpon>MovieSearch.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\MovieSearchGUI.resx">
+      <DependentUpon>MovieSearchGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\MyAccount.resx">
-      <DependentUpon>MyAccount.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\MyAccountGUI.resx">
+      <DependentUpon>MyAccountGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -164,11 +175,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="GUI\Tags.resx">
-      <DependentUpon>Tags.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\TagsGUI.resx">
+      <DependentUpon>TagsGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Users.resx">
-      <DependentUpon>Users.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\UsersGUI.resx">
+      <DependentUpon>UsersGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -201,6 +216,34 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\SQL\Customers\SearchCustomers.sql" />
+    <Content Include="Resources\SQL\Customers\SelectAllFromCustomers.sql" />
+    <Content Include="Resources\SQL\Customers\SelectCustomerById.sql" />
+    <Content Include="Resources\SQL\DVDQueries\CountDVDsByStatus.sql" />
+    <Content Include="Resources\SQL\DVDQueries\GetAvailableDVDByMovieID.sql" />
+    <Content Include="Resources\SQL\DVDQueries\SelectAllDVDs.sql" />
+    <Content Include="Resources\SQL\DVDQueries\SelectDVDByMovieID.sql" />
+    <Content Include="Resources\SQL\DVDQueries\SelectDVDsByID.sql" />
+    <Content Include="Resources\SQL\OtherQueries\GetLimits.sql" />
+    <Content Include="Resources\SQL\MovieQueries\GetMovieTitle.sql" />
+    <Content Include="Resources\SQL\MovieQueries\SearchMoviesWithTheseTags.sql" />
+    <Content Include="Resources\SQL\MovieQueries\SelectAllFromMovies.sql" />
+    <Content Include="Resources\SQL\MovieQueries\SelectMovieByID.sql" />
+    <Content Include="Resources\SQL\OtherQueries\NewID.sql" />
+    <Content Include="Resources\SQL\RentingRecord\GetAllRentingRecord.sql" />
+    <Content Include="Resources\SQL\RentingRecord\GetRentingRecordByCustomerID.sql" />
+    <Content Include="Resources\SQL\RentingRecord\GetTransactionByID.sql" />
+    <Content Include="Resources\SQL\RentingRecord\GetTransactionsByDVDID.sql" />
+    <Content Include="Resources\SQL\Tags\SearchTags.sql" />
+    <Content Include="Resources\SQL\Tags\SelectAllMoviesTags.sql" />
+    <Content Include="Resources\SQL\Tags\SelectAllTags.sql" />
+    <Content Include="Resources\SQL\Tags\SelectMoviesTagsByMovieID.sql" />
+    <Content Include="Resources\SQL\Tags\SelectMoviesTagsByTagAndMovieId.sql" />
+    <Content Include="Resources\SQL\Tags\SelectTagByID.sql" />
+    <Content Include="Resources\SQL\Tags\SelectTagsByMovieID.sql" />
+    <Content Include="Resources\SQL\Users\SelectAllFromUsers.sql" />
+    <Content Include="Resources\SQL\Users\SelectUser.sql" />
+    <Content Include="Resources\SQL\Users\SelectUserById.sql" />
     <None Include="bin\Debug\Database.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -209,9 +252,7 @@
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

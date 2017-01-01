@@ -1,0 +1,1 @@
+SELECT * FROM Tags WHERE name LIKE ? AND category = ? ORDER BY name ASC
