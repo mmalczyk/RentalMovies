@@ -1,1 +1,1 @@
-SELECT * FROM Tags WHERE category = ? ORDER BY name ASC
+SELECT * FROM Tags ORDER BY name ASC

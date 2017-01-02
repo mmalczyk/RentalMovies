@@ -59,7 +59,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Records\DVD.cs" />
+    <Compile Include="Domain\Records\Renting.cs" />
+    <Compile Include="Domain\Records\Customer.cs" />
+    <Compile Include="Domain\Records\Movie.cs" />
+    <Compile Include="Domain\Records\Tag.cs" />
+    <Compile Include="Domain\Tables\CustomersTable.cs" />
     <Compile Include="Domain\Tables\DataTableObject.cs" />
+    <Compile Include="Domain\Tables\DVDsTable.cs" />
+    <Compile Include="Domain\Tables\RentingTable.cs" />
+    <Compile Include="Domain\Tables\MoviesTable.cs" />
+    <Compile Include="Domain\Tables\TagsTable.cs" />
     <Compile Include="Domain\Tables\UsersTable.cs" />
     <Compile Include="GUI\AdministrationGUI.cs">
       <SubType>Form</SubType>
@@ -183,7 +193,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -237,6 +247,7 @@
     <Content Include="Resources\SQL\Tags\SearchTags.sql" />
     <Content Include="Resources\SQL\Tags\SelectAllMoviesTags.sql" />
     <Content Include="Resources\SQL\Tags\SelectAllTags.sql" />
+    <Content Include="Resources\SQL\Tags\SelectAllTagsOfGenre.sql" />
     <Content Include="Resources\SQL\Tags\SelectMoviesTagsByMovieID.sql" />
     <Content Include="Resources\SQL\Tags\SelectMoviesTagsByTagAndMovieId.sql" />
     <Content Include="Resources\SQL\Tags\SelectTagByID.sql" />

@@ -24,20 +24,13 @@ namespace RentalMovies
             set { this.strCon = value; }
         }
 
-        public DataSet GetConnection
-        {
-
-            get { return DataSet(); }
-
-        }
-
         public void AddParameter(string name, object value)
         {
             if (parameters == null) parameters = new Dictionary<string, object>();
             parameters.Add(name, value);
         }
 
-        private DataSet DataSet()
+        public DataSet GetDataSet()
         {
             
             SqlConnection con = new SqlConnection(strCon);

@@ -41,7 +41,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = c + " ORDER by title ASC ";
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var MoviesList = dataSet.Tables[0].Rows;
 
                 MoviesListView.Items.Clear();
@@ -59,7 +59,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = Properties.Settings.Default.GetRentingRecordByCustomerId.Replace("[id]", this.CustomerId);
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var List = dataSet.Tables[0].Rows;
 
                 BorrowedListView.Items.Clear();
@@ -69,7 +69,7 @@ namespace RentalMovies
                 {
                     string dvdid = objConnect.GetValue(row, 2);
                     this.objConnect.Sql = Properties.Settings.Default.GetMovieTitle.Replace("[id]", dvdid);
-                    System.Data.DataSet dataSet2 = objConnect.GetConnection;
+                    System.Data.DataSet dataSet2 = objConnect.GetDataSet();
                     string title = objConnect.GetValue(dataSet2.Tables[0].Rows[0], 1);
 
                     string date = objConnect.GetValue(row, 3);
@@ -85,7 +85,7 @@ namespace RentalMovies
                     else
                     {
                         this.objConnect.Sql = Properties.Settings.Default.SelectDVDsById.Replace("[id]", dvdid);
-                        System.Data.DataSet dataSet3 = objConnect.GetConnection;
+                        System.Data.DataSet dataSet3 = objConnect.GetDataSet();
                         status = objConnect.GetValue(dataSet3.Tables[0].Rows[0], 2);
                     }
 
@@ -129,7 +129,7 @@ namespace RentalMovies
                     if (dvdid.Trim().CompareTo("") != 0)
                     {
                         this.objConnect.Sql = Properties.Settings.Default.GetAllRentingRecord;
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         var dataTable = dataSet.Tables[0];
                         var row = dataTable.NewRow();
                         row[0] = objConnect.GetNewID();
@@ -140,7 +140,7 @@ namespace RentalMovies
                         this.objConnect.UpdateDatabase(dataSet);
 
                         this.objConnect.Sql = Properties.Settings.Default.SelectDVDsById.Replace("[id]", dvdid);
-                        dataSet = objConnect.GetConnection;
+                        dataSet = objConnect.GetDataSet();
                         row = dataSet.Tables[0].Rows[0];
                         row.BeginEdit();
                         row[2] = "Pozyczony";
@@ -174,7 +174,7 @@ namespace RentalMovies
                 {
                     string transactionid = BorrowedListView.SelectedItems[0].SubItems[3].Text.Trim();
                     this.objConnect.Sql = Properties.Settings.Default.GetTransactionById.Replace("[id]", transactionid);
-                    System.Data.DataSet dataSet = objConnect.GetConnection;
+                    System.Data.DataSet dataSet = objConnect.GetDataSet();
                     var dataTable = dataSet.Tables[0];
                     var row = dataTable.Rows[0];
                     string dvdid = objConnect.GetValue(row, 2);
@@ -192,7 +192,7 @@ namespace RentalMovies
                     objConnect.UpdateDatabase(dataSet);
 
                     this.objConnect.Sql = Properties.Settings.Default.SelectDVDsById.Replace("[id]", dvdid);
-                    dataSet = objConnect.GetConnection;
+                    dataSet = objConnect.GetDataSet();
                     row = dataSet.Tables[0].Rows[0];
                     string movieid = objConnect.GetValue(row, 1);
                     row.BeginEdit();
@@ -226,7 +226,7 @@ namespace RentalMovies
         private string GetAvailableDVDs (string movieid)
         {
             this.objConnect.Sql = Properties.Settings.Default.GetAvailableDVDByMovieId.Replace("[id]", movieid);
-            System.Data.DataSet dataSet = objConnect.GetConnection;
+            System.Data.DataSet dataSet = objConnect.GetDataSet();
             if (dataSet.Tables[0].Rows.Count == 0) return "";
             return objConnect.GetValue(dataSet.Tables[0].Rows[0], 0);
         }
@@ -234,7 +234,7 @@ namespace RentalMovies
         private string GetDVDCount(string status, string movieid)
         {
             this.objConnect.Sql = Properties.Settings.Default.CountDVDsByStatus.Replace("[id]", movieid).Replace("[status]", status);
-            System.Data.DataSet dataSet = objConnect.GetConnection;
+            System.Data.DataSet dataSet = objConnect.GetDataSet();
             return objConnect.GetValue(dataSet.Tables[0].Rows[0], 0);
         }
 

@@ -40,7 +40,7 @@ namespace RentalMovies
             {
                 this.currentSql = c;
                 this.objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedRadioButton();
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var CustomerList = dataSet.Tables[0].Rows;
 
                 CustomersListView.Items.Clear();
@@ -107,7 +107,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = c;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 DataRow row = dataSet.Tables[0].Rows[0];
                 NameTextBox.Text = objConnect.GetValue(row, 1);
                 SurnameTextBox.Text = objConnect.GetValue(row, 2);
@@ -154,7 +154,7 @@ namespace RentalMovies
                 try
                 {
                     this.objConnect.Sql = Properties.Settings.Default.SelectAllFromCustomers;
-                    System.Data.DataSet dataSet = objConnect.GetConnection;
+                    System.Data.DataSet dataSet = objConnect.GetDataSet();
                     var dataTable = dataSet.Tables[0];
                     var row = dataTable.NewRow();
                     row[0] = objConnect.GetNewID();
@@ -196,7 +196,7 @@ namespace RentalMovies
                     {
                         string customerid = CustomersListView.SelectedItems[0].SubItems[0].Text;
                         this.objConnect.Sql = Properties.Settings.Default.SelectCustomerByID.Replace("[id]", customerid);
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         dataSet.Tables[0].Rows[0].Delete();
                         objConnect.UpdateDatabase(dataSet);
                         this.ResetCustomer();
@@ -204,7 +204,7 @@ namespace RentalMovies
                         this.FillCustomerList(Properties.Settings.Default.SelectAllFromCustomers);
 
                         this.objConnect.Sql = Properties.Settings.Default.GetRentingRecordByCustomerId.Replace("[id]", customerid);
-                        dataSet = objConnect.GetConnection;
+                        dataSet = objConnect.GetDataSet();
                         var rows = dataSet.Tables[0].Rows;
                         List<string> dvdids = new List<string>();
                         foreach (DataRow row in rows)
@@ -217,7 +217,7 @@ namespace RentalMovies
                         foreach (var dvd in dvdids)
                         {
                             this.objConnect.Sql = Properties.Settings.Default.SelectDVDsById.Replace("[id]", dvd);
-                            dataSet = objConnect.GetConnection;
+                            dataSet = objConnect.GetDataSet();
                             rows = dataSet.Tables[0].Rows;
                             foreach (DataRow row in rows)
                             {
@@ -247,7 +247,7 @@ namespace RentalMovies
                     try
                     {
                         this.objConnect.Sql = Properties.Settings.Default.SelectCustomerByID.Replace("[id]", CustomersListView.SelectedItems[0].SubItems[0].Text);
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         var dataTable = dataSet.Tables[0];
                         var row = dataSet.Tables[0].Rows[0];
                         row.BeginEdit();

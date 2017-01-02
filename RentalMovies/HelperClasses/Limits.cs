@@ -15,7 +15,7 @@ namespace RentalMovies
                 DatabaseConnection objConnect = new DatabaseConnection();
                 objConnect.ConnectionString = Properties.Settings.Default.DatabaseConnectionString;
                 objConnect.Sql = Properties.Settings.Default.GetLimits;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var dataTable = dataSet.Tables[0];
                 var row = dataSet.Tables[0].Rows[0];
                 return objConnect.GetValue(row, 1);
@@ -29,7 +29,7 @@ namespace RentalMovies
                 DatabaseConnection objConnect = new DatabaseConnection();
                 objConnect.ConnectionString = Properties.Settings.Default.DatabaseConnectionString;
                 objConnect.Sql = Properties.Settings.Default.GetLimits;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var dataTable = dataSet.Tables[0];
                 var row = dataSet.Tables[0].Rows[0];
                 return objConnect.GetValue(row, 2);

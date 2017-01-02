@@ -39,14 +39,14 @@ namespace RentalMovies
 
         private void FillUserList()
         {
-            GUITools.FillList(ref UsersListView, usersTable.GetSortedUserList(GetCheckedOrder()), new User(), Resources.Strings.errorMessage+"FillUserList");
+            GUITools.FillList(ref UsersListView, usersTable.SelectSorted(GetCheckedOrder()), new User(), Resources.Strings.errorMessage+"FillUserList");
         }
 
         private User GetUserById()
         {
             var listItems = UsersListView.SelectedItems;
             if (listItems != null && listItems.Count > 0)
-                return usersTable.SelectUserById(listItems[0].Text);
+                return usersTable.SelectById(listItems[0].Text);
             return null;
         }
 
@@ -87,7 +87,7 @@ namespace RentalMovies
         {
             if (user != null)
             {
-                UserIDTextBox2.Text = user.UserID;
+                UserIDTextBox2.Text = user.Id;
                 UserNameTextBox2.Text = user.Forename;
                 UserSurnameTextBox2.Text = user.Surname;
                 UserLoginTextBox2.Text = user.Login;
@@ -139,7 +139,7 @@ namespace RentalMovies
                 UserLoginTextBox2.Text.Trim(),
                 UserPasswordTextBox2.Text.Trim(),
                 UserJobTextBox2.Text.Trim());
-            user.UserID = UserIDTextBox2.Text.Trim();
+            user.Id = UserIDTextBox2.Text.Trim();
             return user;
         }
 
@@ -149,7 +149,7 @@ namespace RentalMovies
             if (user.ErrorMessage > 0)
                 MessageBox.Show(Resources.Strings.badRecordMessage);
             else
-                usersTable.AddUser(user);
+                usersTable.Add(user);
             FillUserList();
             ResizeUserListView();
         }
@@ -169,7 +169,7 @@ namespace RentalMovies
             {
                 if (MessageBox.Show(Resources.Strings.confirmDeleteMessage, Resources.Strings.confirmButtonMessage, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    usersTable.DeleteUser(UserIDTextBox2.Text.Trim());
+                    usersTable.Delete(UserIDTextBox2.Text.Trim());
                     ResetUser();
                     FillUserList();
                     ResizeUserListView();
@@ -187,7 +187,7 @@ namespace RentalMovies
                     MessageBox.Show(Resources.Strings.badRecordMessage);
                 else
                 {
-                    usersTable.UpdateUser(user);
+                    usersTable.Update(user);
                     FillUserList();
                     this.ResizeUserListView();
                 }

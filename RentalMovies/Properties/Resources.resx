@@ -175,6 +175,9 @@
   <data name="SelectAllTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sql\tags\selectalltags.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
+  <data name="SelectAllTagsOfGenre" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sql\tags\selectalltagsofgenre.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="SelectCustomerById" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sql\customers\selectcustomerbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>

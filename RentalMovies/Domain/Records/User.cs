@@ -14,7 +14,6 @@ namespace RentalMovies.Domain.Records
         private string login;
         private string password;
         private string surname;
-        private string userID;
 
         private byte[] _password;
         private int _errorCode;
@@ -80,19 +79,6 @@ namespace RentalMovies.Domain.Records
             }
         }
 
-        public string UserID
-        {
-            get
-            {
-                return userID;
-            }
-
-            set
-            {
-                userID = value;
-            }
-        }
-
         public string Job
         {
             get
@@ -127,7 +113,7 @@ namespace RentalMovies.Domain.Records
         //posiadanie id niekoniecznie oznacza, że obiekt jest w bazie - mogło zostać użyte DELETE
         public override void init(DataRow user)
         {
-            this.UserID = user.ItemArray.GetValue(0).ToString().Trim();
+            this.Id = user.ItemArray.GetValue(0).ToString().Trim();
             this.Forename = user.ItemArray.GetValue(1).ToString().Trim();
             this.Surname = user.ItemArray.GetValue(2).ToString().Trim();
             this.Login = user.ItemArray.GetValue(3).ToString().Trim();
@@ -143,7 +129,7 @@ namespace RentalMovies.Domain.Records
 
         public override string[] toArray()
         {
-            return new string[] { UserID.Trim(), Forename, Surname, Login, Job };
+            return new string[] { Id.Trim(), Forename, Surname, Login, Job };
         }
 
         public DateTime ExpiryDate
@@ -205,7 +191,7 @@ namespace RentalMovies.Domain.Records
         {
             if (this.ErrorMessage < 5)
             {
-                if (UserID == null && this.IsUnique() == false) this.ErrorMessage = 4;
+                if (Id == null && this.IsUnique() == false) this.ErrorMessage = 4;
                 if (Forename == null || Surname == null || Login == null || Job == null) this.ErrorMessage = 1;
                 if (Empty(Forename) || Empty(Surname) || Empty(Login) || Empty(Job)) this.ErrorMessage = 2;
                 if (Login.Trim().Length < 3) this.ErrorMessage = 3;
@@ -256,5 +242,7 @@ namespace RentalMovies.Domain.Records
             */
             return true;
         }
+
+
     }
 }

@@ -78,7 +78,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[login]", loginTextBox.Text).Replace("[password]", passwordTextBox.Text);
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 if (dataSet.Tables[0].Rows.Count == 0)
                 {
                     //Próba zalogowania odrzucona

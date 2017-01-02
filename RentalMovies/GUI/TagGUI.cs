@@ -38,7 +38,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = c;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var DirectorList = dataSet.Tables[0].Rows;
 
                 ListView.Items.Clear();
@@ -68,7 +68,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = c;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 DataRow row = dataSet.Tables[0].Rows[0];
                 SearchTextBox.Text = objConnect.GetValue(row, 1);
             }

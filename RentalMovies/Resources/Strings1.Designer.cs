@@ -88,15 +88,6 @@ namespace RentalMovies.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pusty tag.
-        /// </summary>
-        internal static string emptyTagText {
-            get {
-                return ResourceManager.GetString("emptyTagText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error: .
         /// </summary>
         internal static string errorMessage {
@@ -111,15 +102,6 @@ namespace RentalMovies.Resources {
         internal static string noUserPickedMessage {
             get {
                 return ResourceManager.GetString("noUserPickedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nie wybrano tagu.
-        /// </summary>
-        internal static string tagsNotChosenText {
-            get {
-                return ResourceManager.GetString("tagsNotChosenText", resourceCulture);
             }
         }
         

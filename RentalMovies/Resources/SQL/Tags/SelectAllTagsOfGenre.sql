@@ -1,0 +1,1 @@
+SELECT * FROM Tags WHERE category = @category ORDER BY name ASC

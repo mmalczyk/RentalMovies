@@ -126,11 +126,23 @@
   <data name="confirmDeleteMessage" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć?</value>
   </data>
+  <data name="emptyTagText" xml:space="preserve">
+    <value>Pusty tag</value>
+  </data>
   <data name="errorMessage" xml:space="preserve">
     <value>Error: </value>
   </data>
   <data name="noUserPickedMessage" xml:space="preserve">
     <value>Nie wybrano użytkownika</value>
+  </data>
+  <data name="tagsNotChosenText" xml:space="preserve">
+    <value>Nie wybrano tagu</value>
+  </data>
+  <data name="tagsTableText" xml:space="preserve">
+    <value>Tagi</value>
+  </data>
+  <data name="tagsText" xml:space="preserve">
+    <value>Tagi</value>
   </data>
   <data name="userIdText" xml:space="preserve">
     <value>Id</value>

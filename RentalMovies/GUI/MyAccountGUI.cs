@@ -28,7 +28,7 @@ namespace RentalMovies
 
         private void FillUserBoxes()
         {
-            UserIDTextBox.Text = user.UserID;
+            UserIDTextBox.Text = user.Id;
             UserNameTextBox.Text = user.Forename;
             UserSurnameTextBox.Text = user.Surname;
             UserLoginTextBox.Text = user.Login;
@@ -43,7 +43,7 @@ namespace RentalMovies
                 try
                 {
                     this.objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[password]", CurrentPasswordTextBox.Text).Replace("[login]", user.Login);
-                    System.Data.DataSet dataSet = objConnect.GetConnection;
+                    System.Data.DataSet dataSet = objConnect.GetDataSet();
                     if (dataSet.Tables[0].Rows.Count == 0) PasswordChangeLabel.Text = "Błędne stare hasło";
                     else
                     {

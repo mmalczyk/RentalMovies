@@ -53,7 +53,7 @@ namespace RentalMovies
         private void Correction()
         {
             this.objConnect.Sql = Properties.Settings.Default.SelectAllFromMovies;
-            System.Data.DataSet dataSet = objConnect.GetConnection;
+            System.Data.DataSet dataSet = objConnect.GetDataSet();
             var rows = dataSet.Tables[0].Rows;
             foreach (DataRow row in rows)
             {
@@ -95,7 +95,7 @@ namespace RentalMovies
         private string GetTagName(string movieid)
         {
             this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Writer");
-            System.Data.DataSet dataSet = objConnect.GetConnection;
+            System.Data.DataSet dataSet = objConnect.GetDataSet();
             var rows = dataSet.Tables[0].Rows;
             if (rows.Count == 0) return "";
             else return this.objConnect.GetValue(dataSet.Tables[0].Rows[0], 1);
@@ -107,7 +107,7 @@ namespace RentalMovies
             {
                 this.currentSql = c;
                 this.objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedRadioButton();
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var MoviesList = dataSet.Tables[0].Rows;
 
                 MoviesListView.Items.Clear();
@@ -125,7 +125,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Genre");
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var GenreList = dataSet.Tables[0].Rows;
                 GenreListView.Items.Clear();
                 foreach (DataRow row in GenreList) this.GenreListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 1), objConnect.GetValue(row, 0) }));
@@ -142,7 +142,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Actor");
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var ActorsList = dataSet.Tables[0].Rows;
                 ActorsListView.Items.Clear();
                 foreach (DataRow row in ActorsList) this.ActorsListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 1), objConnect.GetValue(row, 0) }));
@@ -159,7 +159,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = Properties.Settings.Default.SelectDVDByMovieId.Replace("[id]", movieid);
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var DVDList = dataSet.Tables[0].Rows;
                 DVDListView.Items.Clear();
                 foreach (DataRow row in DVDList) this.DVDListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 0), objConnect.GetValue(row, 2) }));
@@ -234,7 +234,7 @@ namespace RentalMovies
             try
             {
                 this.objConnect.Sql = Properties.Settings.Default.SelectMovieByID.Replace("[id]", movieid);
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 DataRow row = dataSet.Tables[0].Rows[0];
                 TitleTextBox.Text = objConnect.GetValue(row, 1);
                 ReleaseYearTextBox.Text = objConnect.GetValue(row, 2);
@@ -285,7 +285,7 @@ namespace RentalMovies
                 try
                 {
                     this.objConnect.Sql = Properties.Settings.Default.SelectAllFromMovies;
-                    System.Data.DataSet dataSet = objConnect.GetConnection;
+                    System.Data.DataSet dataSet = objConnect.GetDataSet();
                     var dataTable = dataSet.Tables[0];
                     var row = dataTable.NewRow();
                     row[0] = objConnect.GetNewID();
@@ -324,13 +324,13 @@ namespace RentalMovies
                     try
                     {
                         this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagID.Replace("[id]", MoviesListView.SelectedItems[0].SubItems[0].Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         var rows = dataSet.Tables[0].Rows;
                         foreach (DataRow row in rows) row.Delete();
                         objConnect.UpdateDatabase(dataSet);
 
                         this.objConnect.Sql = Properties.Settings.Default.SelectMovieByID.Replace("[id]", MoviesListView.SelectedItems[0].SubItems[0].Text);
-                        dataSet = objConnect.GetConnection;
+                        dataSet = objConnect.GetDataSet();
                         dataSet.Tables[0].Rows[0].Delete();
                         objConnect.UpdateDatabase(dataSet);
                         this.ResetMovies();
@@ -356,7 +356,7 @@ namespace RentalMovies
                     try
                     {
                         this.objConnect.Sql = Properties.Settings.Default.SelectMovieByID.Replace("[id]", MoviesListView.SelectedItems[0].SubItems[0].Text);
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         var dataTable = dataSet.Tables[0];
                         var row = dataSet.Tables[0].Rows[0];
                         row.BeginEdit();
@@ -393,13 +393,13 @@ namespace RentalMovies
                         if (tagid != null)
                         {
                             this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Writer");
-                            System.Data.DataSet dataSet = objConnect.GetConnection;
+                            System.Data.DataSet dataSet = objConnect.GetDataSet();
                             var rows = dataSet.Tables[0].Rows;
                             string directorid = "";
                             if (rows.Count > 0) directorid = objConnect.GetValue(rows[0], 0);
 
                             this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagAndMovieId.Replace("[movieid]", movieid).Replace("[tagid]", directorid);
-                            dataSet = objConnect.GetConnection;
+                            dataSet = objConnect.GetDataSet();
                             if (dataSet.Tables[0].Rows.Count > 0)
                             {
                                 dataSet.Tables[0].Rows[0].Delete();
@@ -407,7 +407,7 @@ namespace RentalMovies
                             }
 
                             this.objConnect.Sql = Properties.Settings.Default.SelectAllMoviesTags;
-                            dataSet = objConnect.GetConnection;
+                            dataSet = objConnect.GetDataSet();
                             var dataTable = dataSet.Tables[0];
                             var row = dataTable.NewRow();
                             row[0] = objConnect.GetNewID();
@@ -439,7 +439,7 @@ namespace RentalMovies
                         if (tagid != null)
                         {
                             this.objConnect.Sql = Properties.Settings.Default.SelectAllMoviesTags;
-                            System.Data.DataSet dataSet = objConnect.GetConnection;
+                            System.Data.DataSet dataSet = objConnect.GetDataSet();
                             var dataTable = dataSet.Tables[0];
                             var row = dataTable.NewRow();
                             row[0] = objConnect.GetNewID();
@@ -469,7 +469,7 @@ namespace RentalMovies
                         if (tagid != null)
                         {
                             this.objConnect.Sql = Properties.Settings.Default.SelectAllMoviesTags;
-                            System.Data.DataSet dataSet = objConnect.GetConnection;
+                            System.Data.DataSet dataSet = objConnect.GetDataSet();
                             var dataTable = dataSet.Tables[0];
                             var row = dataTable.NewRow();
                             row[0] = objConnect.GetNewID();
@@ -494,7 +494,7 @@ namespace RentalMovies
                     try
                     {
                         this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagID.Replace("[id]", GenreListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         dataSet.Tables[0].Rows[0].Delete();
                         objConnect.UpdateDatabase(dataSet);
                         this.FillGenreList(MoviesListView.SelectedItems[0].SubItems[0].Text.Trim());
@@ -517,7 +517,7 @@ namespace RentalMovies
                     try
                     {
                         this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagID.Replace("[id]", ActorsListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         dataSet.Tables[0].Rows[0].Delete();
                         objConnect.UpdateDatabase(dataSet);
                         this.FillActorList(MoviesListView.SelectedItems[0].SubItems[0].Text.Trim());
@@ -546,7 +546,7 @@ namespace RentalMovies
             {
                 string movieid = MoviesListView.SelectedItems[0].SubItems[0].Text;
                 this.objConnect.Sql = Properties.Settings.Default.SelectAllDVDs;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                System.Data.DataSet dataSet = objConnect.GetDataSet();
                 var dataTable = dataSet.Tables[0];
                 var row = dataTable.NewRow();
                 string DVDId = objConnect.GetNewID();
@@ -573,14 +573,14 @@ namespace RentalMovies
                         string dvdid = DVDListView.SelectedItems[0].SubItems[0].Text.Trim();
                         string movieid = MoviesListView.SelectedItems[0].SubItems[0].Text.Trim();
                         this.objConnect.Sql = Properties.Settings.Default.SelectDVDsById.Replace("[id]", dvdid);
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
+                        System.Data.DataSet dataSet = objConnect.GetDataSet();
                         dataSet.Tables[0].Rows[0].Delete();
                         objConnect.UpdateDatabase(dataSet);
                         this.FillDVDList(MoviesListView.SelectedItems[0].SubItems[0].Text.Trim());
                         this.FillTextBoxes(movieid);
 
                         this.objConnect.Sql = Properties.Settings.Default.GetTransactionsByDVDId.Replace("[id]", dvdid);
-                        dataSet = objConnect.GetConnection;
+                        dataSet = objConnect.GetDataSet();
                         var rows = dataSet.Tables[0].Rows;
                         foreach (DataRow row in rows) row.Delete();
                         objConnect.UpdateDatabase(dataSet);
@@ -597,7 +597,7 @@ namespace RentalMovies
         private string GetDVDCount(string status, string movieid)
         {
             this.objConnect.Sql = Properties.Settings.Default.CountDVDsByStatus.Replace("[id]", movieid).Replace("[status]", status);
-            System.Data.DataSet dataSet = objConnect.GetConnection;
+            System.Data.DataSet dataSet = objConnect.GetDataSet();
             return objConnect.GetValue(dataSet.Tables[0].Rows[0], 0);
         }
 

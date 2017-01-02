@@ -27,8 +27,8 @@ namespace RentalMovies
         {
             if (Convert.ToInt32(OverduePriceTextBox.Text.Trim()) >= 1 && Convert.ToInt32(TimeLimitTextBox.Text.Trim()) >= 1)
             {
-                this.objConnect.Sql = Properties.Settings.Default.GetLimits;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
+                objConnect.Sql = Properties.Settings.Default.GetLimits;
+                DataSet dataSet = objConnect.GetDataSet();
                 var dataTable = dataSet.Tables[0];
                 var row = dataSet.Tables[0].Rows[0];
                 row.BeginEdit();
@@ -36,7 +36,7 @@ namespace RentalMovies
                 row[2] = TimeLimitTextBox.Text.Trim();
                 row.EndEdit();
                 objConnect.UpdateDatabase(dataSet);
-                this.Close();
+                Close();
             }
             else MessageBox.Show("Wartość nie może być ujemna ani zerowa");
         }

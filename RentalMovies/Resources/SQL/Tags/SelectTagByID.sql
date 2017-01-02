@@ -1,1 +1,1 @@
-SELECT * FROM Tags WHERE tagId = ?
+SELECT * FROM Tags WHERE tagId = @id
