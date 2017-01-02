@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -13,7 +10,8 @@ namespace RentalMovies
     {
         private string sql;
         private string strCon;
-        System.Data.SqlClient.SqlDataAdapter daUsers;
+        private SqlDataAdapter daUsers;
+        private Dictionary<string, object> parameters;
 
         public string Sql
         {
@@ -26,27 +24,51 @@ namespace RentalMovies
             set { this.strCon = value; }
         }
 
-        public System.Data.DataSet GetConnection
+        public DataSet GetConnection
         {
 
             get { return DataSet(); }
 
         }
 
-        private System.Data.DataSet DataSet()
+        public void AddParameter(string name, object value)
         {
-            System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(strCon);
+            if (parameters == null) parameters = new Dictionary<string, object>();
+            parameters.Add(name, value);
+        }
+
+        private DataSet DataSet()
+        {
+            
+            SqlConnection con = new SqlConnection(strCon);
             con.Open();
-            daUsers = new System.Data.SqlClient.SqlDataAdapter(sql, con);
-            System.Data.DataSet dataSet = new System.Data.DataSet();
+
+            if (parameters == null)
+                daUsers = new SqlDataAdapter(sql, con);
+            else
+            {
+                SqlCommand command = new SqlCommand(sql, con);
+                command.Connection = con;
+                command.CommandText = sql;
+                foreach (var pair in parameters)
+                    command.Parameters.AddWithValue(pair.Key, pair.Value);
+                command.CommandType = CommandType.Text;
+
+                daUsers = new SqlDataAdapter(command);
+
+                //wipe parameters after you're done
+                parameters = null;
+            }
+
+            DataSet dataSet = new DataSet();
             daUsers.Fill(dataSet, "dataSet");
             con.Close();
             return dataSet;
         }
 
-        public void UpdateDatabase(System.Data.DataSet dataSet)
+        public void UpdateDatabase(DataSet dataSet)
         {
-            System.Data.SqlClient.SqlCommandBuilder cb = new System.Data.SqlClient.SqlCommandBuilder(daUsers);
+            SqlCommandBuilder cb = new SqlCommandBuilder(daUsers);
             cb.DataAdapter.Update(dataSet.Tables[0]);
         }
 

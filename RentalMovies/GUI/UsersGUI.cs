@@ -10,7 +10,6 @@ namespace RentalMovies
     public partial class Users : Base
     {
         private UsersTable usersTable;
-
         public Users()
         {
             InitializeComponent();
@@ -20,58 +19,46 @@ namespace RentalMovies
 
         private void Users_Load(object sender, EventArgs e)
         {
-            this.ResetUser();
+            ResetUser();
 
             UsersListView.View = View.Details;
-            UsersListView.Columns.Add("Id", -2, HorizontalAlignment.Left);
+            UsersListView.Columns.Add(Resources.Strings.userIdText, -2, HorizontalAlignment.Left);
 
-            UsersListView.Columns.Add("Imię", -2, HorizontalAlignment.Left);
-            UsersListView.Columns.Add("Nazwisko", -2, HorizontalAlignment.Left);
-            UsersListView.Columns.Add("Login", -2, HorizontalAlignment.Left);
-            UsersListView.Columns.Add("Rola", -2, HorizontalAlignment.Left);
+            UsersListView.Columns.Add(Resources.Strings.userNameText, -2, HorizontalAlignment.Left);
+            UsersListView.Columns.Add(Resources.Strings.userSurnameText, -2, HorizontalAlignment.Left);
+            UsersListView.Columns.Add(Resources.Strings.userLoginText, -2, HorizontalAlignment.Left);
+            UsersListView.Columns.Add(Resources.Strings.userRoleText, -2, HorizontalAlignment.Left);
 
-            GUITools.FillList(ref UsersListView, usersTable.GetSortedUserList(this.FindCheckedUserRadioButton(), null), new User(), "Error: FillUserList");
+            FillUserList();
 
-            this.ResizeUserListView();
+            ResizeUserListView();
 
             GUITools.LoadRoles(ref UserJobTextBox2, Role.getRoles());
         }
 
 
-        private void FillUserList(String c)
+        private void FillUserList()
         {
-           //database
-           this.objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedUserRadioButton();
-           System.Data.DataSet dataSet = objConnect.GetConnection;
-           var userList = dataSet.Tables[0].Rows;
-
-            GUITools.FillList(ref UsersListView, userList, new User(), "Error: FillUserList");
+            GUITools.FillList(ref UsersListView, usersTable.GetSortedUserList(GetCheckedOrder()), new User(), Resources.Strings.errorMessage+"FillUserList");
         }
 
-        private string FindCheckedUserRadioButton()
+        private User GetUserById()
         {
-            if (SortUserByNameAsc.Checked == true) return "forename ASC";
-            if (SortUserByNameDesc.Checked == true) return "forename DESC";
-            if (SortUserBySurnameAsc.Checked == true) return "surname ASC";
-            if (SortUserBySurnameDesc.Checked == true) return "surname DESC";
-            if (SortUserByJobAsc.Checked == true) return "job ASC";
-            if (SortUserByJobDesc.Checked == true) return "job DESC";
-            return "userId ASC";
+            var listItems = UsersListView.SelectedItems;
+            if (listItems != null && listItems.Count > 0)
+                return usersTable.SelectUserById(listItems[0].Text);
+            return null;
         }
 
-        private bool UserIsCorrect()
+        private string GetCheckedOrder()
         {
-            if (UserNameTextBox2.Text == null) return false;
-            if (UserSurnameTextBox2.Text == null) return false;
-            if (UserLoginTextBox2.Text == null) return false;
-            if (UserPasswordTextBox2.Text == null) return false;
-            if (UserJobTextBox2.Text == null) return false;
-            if (UserNameTextBox2.Text.Trim().CompareTo("") == 0) return false;
-            if (UserSurnameTextBox2.Text.Trim().CompareTo("") == 0) return false;
-            if (UserLoginTextBox2.Text.Trim().CompareTo("") == 0) return false;
-            if (UserPasswordTextBox2.Text.Trim().CompareTo("") == 0) return false;
-            if (UserJobTextBox2.SelectedIndices.Count == 0) return false;
-            return true;
+            if (SortUserByNameAsc.Checked == true) return usersTable.SortUserByNameAsc;
+            if (SortUserByNameDesc.Checked == true) return usersTable.SortUserByNameDesc;
+            if (SortUserBySurnameAsc.Checked == true) return usersTable.SortUserBySurnameAsc;
+            if (SortUserBySurnameDesc.Checked == true) return usersTable.SortUserBySurnameDesc;
+            if (SortUserByJobAsc.Checked == true) return usersTable.SortUserByJobAsc;
+            if (SortUserByJobDesc.Checked == true) return usersTable.SortUserByJobDesc;
+            return usersTable.BasicSort;
         }
 
         private void ResetUser()
@@ -93,24 +80,13 @@ namespace RentalMovies
 
         private void UsersListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            try
-            {
-                var listItem = this.UsersListView.SelectedItems;
-                if (listItem != null && listItem.Count > 0) FillUserTextBoxes(Properties.Settings.Default.SelectUserByID.Replace("[id]", listItem[0].Text));
-            }
-            catch (Exception f)
-            {
-                MessageBox.Show(f.Message + "Error: UsersListView_ItemSelectionChanged");
-            }
+            FillUserTextBoxes(GetUserById());
         }
 
-        private void FillUserTextBoxes(String c)
+        private void FillUserTextBoxes(User user)
         {
-            try
+            if (user != null)
             {
-                this.objConnect.Sql = c;
-                System.Data.DataSet dataSet = objConnect.GetConnection;
-                User user = new User(dataSet.Tables[0].Rows[0]);
                 UserIDTextBox2.Text = user.UserID;
                 UserNameTextBox2.Text = user.Forename;
                 UserSurnameTextBox2.Text = user.Surname;
@@ -118,77 +94,64 @@ namespace RentalMovies
                 UserPasswordTextBox2.Text = user.Password;
                 UserJobTextBox2.Text = user.Job;
             }
-            catch (Exception f)
-            {
-                MessageBox.Show(f.Message + "Error: FillUserTextBoxes");
-            }
         }
 
         private void UserResetButton_Click(object sender, EventArgs e)
         {
-            this.ResetUser();
+            ResetUser();
         }
 
         private void SortUserByNameAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Resources.SelectAllFromUsers);
+            FillUserList();
         }
 
         private void SortUserByNameDesc_CheckedChanged(object sender, EventArgs e)
         {
-//            this.FillUserList(Properties.Resources.SelectAllFromUsers);
-            this.FillUserList(Properties.Resources.SelectAllFromUsers);
-
+            FillUserList();
         }
 
         private void SortUserBySurnameAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Resources.SelectAllFromUsers);
-
+            FillUserList();
         }
 
         private void SortUserBySurnameDesc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Resources.SelectAllFromUsers);
+            FillUserList();
         }
 
         private void SortUserByJobAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Resources.SelectAllFromUsers);
+            FillUserList();
         }
 
         private void SortUserByJobDesc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillUserList(Properties.Resources.SelectAllFromUsers);
+            FillUserList();
+        }
+
+        private User CollectUser()
+        {
+            User user = new User(
+                UserNameTextBox2.Text.Trim(),
+                UserSurnameTextBox2.Text.Trim(),
+                UserLoginTextBox2.Text.Trim(),
+                UserPasswordTextBox2.Text.Trim(),
+                UserJobTextBox2.Text.Trim());
+            user.UserID = UserIDTextBox2.Text.Trim();
+            return user;
         }
 
         private void AddUserButton_Click(object sender, EventArgs e)
         {
-            if (this.UserIsCorrect() == false) MessageBox.Show("Błędnie wypełniony rekord");
+            User user = CollectUser();
+            if (user.ErrorMessage > 0)
+                MessageBox.Show(Resources.Strings.badRecordMessage);
             else
-            {
-                try
-                {
-                    this.objConnect.Sql = Properties.Resources.SelectAllFromUsers;
-                    System.Data.DataSet dataSet = objConnect.GetConnection;
-                    var dataTable = dataSet.Tables[0];
-                    var row = dataTable.NewRow();
-                    row[0] = objConnect.GetNewID();
-                    row[1] = UserNameTextBox2.Text.Trim();
-                    row[2] = UserSurnameTextBox2.Text.Trim();
-                    row[3] = UserLoginTextBox2.Text.Trim();
-                    row[4] = UserPasswordTextBox2.Text.Trim();
-                    row[5] = UserJobTextBox2.Text.Trim();
-                    dataTable.Rows.Add(row);
-                    objConnect.UpdateDatabase(dataSet);
-                    this.FillUserList(Properties.Resources.SelectAllFromUsers);
-                    this.ResizeUserListView();
-                }
-                catch (Exception f)
-                {
-                    MessageBox.Show(f.Message + "Error: AddUserButton_Click");
-                }
-            }
+                usersTable.AddUser(user);
+            FillUserList();
+            ResizeUserListView();
         }
 
         private void ResizeUserListView()
@@ -202,57 +165,31 @@ namespace RentalMovies
 
         private void DeleteUserButton_Click(object sender, EventArgs e)
         {
-            if (UsersListView.SelectedItems.Count == 0) MessageBox.Show("Nie wybrano użytkownika");
+            if (UsersListView.SelectedItems.Count == 0) MessageBox.Show(Resources.Strings.noUserPickedMessage);
             {
-                if (MessageBox.Show("Czy na pewno chcesz usunąć?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(Resources.Strings.confirmDeleteMessage, Resources.Strings.confirmButtonMessage, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    try
-                    {
-                        this.objConnect.Sql = Properties.Settings.Default.SelectUserByID.Replace("[id]", UserIDTextBox2.Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
-                        dataSet.Tables[0].Rows[0].Delete();
-                        objConnect.UpdateDatabase(dataSet);
-                        this.ResetUser();
-                        this.FillUserList(Properties.Resources.SelectAllFromUsers);
-                        this.ResizeUserListView();
-                    }
-                    catch (Exception f)
-                    {
-                        MessageBox.Show(f.Message + "Error: AddUserButton_Click");
-                    }
+                    usersTable.DeleteUser(UserIDTextBox2.Text.Trim());
+                    ResetUser();
+                    FillUserList();
+                    ResizeUserListView();
                 }
             }
         }
 
         private void EditUserButton_Click(object sender, EventArgs e)
         {
-            if (UsersListView.SelectedItems.Count == 0) MessageBox.Show("Nie wybrano użytkownika");
+            if (UsersListView.SelectedItems.Count == 0) MessageBox.Show(Resources.Strings.noUserPickedMessage);
             else
             {
-                if (this.UserIsCorrect() == false) MessageBox.Show("Błędnie wypełniony rekord");
+                User user = CollectUser();
+                if (user.ErrorMessage > 0)
+                    MessageBox.Show(Resources.Strings.badRecordMessage);
                 else
                 {
-                    try
-                    {
-                        this.objConnect.Sql = Properties.Settings.Default.SelectUserByID.Replace("[id]", UserIDTextBox2.Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetConnection;
-                        var dataTable = dataSet.Tables[0];
-                        var row = dataSet.Tables[0].Rows[0];
-                        row.BeginEdit();
-                        row[1] = UserNameTextBox2.Text.Trim();
-                        row[2] = UserSurnameTextBox2.Text.Trim();
-                        row[3] = UserLoginTextBox2.Text.Trim();
-                        row[4] = UserPasswordTextBox2.Text.Trim();
-                        row[5] = UserJobTextBox2.Text.Trim();
-                        row.EndEdit();
-                        objConnect.UpdateDatabase(dataSet);
-                        this.FillUserList(Properties.Resources.SelectAllFromUsers);
-                        this.ResizeUserListView();
-                    }
-                    catch (Exception f)
-                    {
-                        MessageBox.Show(f.Message + "Error: AddUserButton_Click");
-                    }
+                    usersTable.UpdateUser(user);
+                    FillUserList();
+                    this.ResizeUserListView();
                 }
             }
         }

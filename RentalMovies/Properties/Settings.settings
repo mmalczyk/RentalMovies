@@ -2,17 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RentalMovies.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="SelectAllFromUsers" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Users </Value>
-    </Setting>
     <Setting Name="SelectUser" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM Users WHERE login='[login]' AND password='[password]';</Value>
     </Setting>
     <Setting Name="OrderBy" Type="System.String" Scope="Application">
       <Value Profile="(Default)"> ORDER BY </Value>
-    </Setting>
-    <Setting Name="SelectUserByID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Users WHERE userId='[id]'</Value>
     </Setting>
     <Setting Name="NewId" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Select Cast(Cast(newid() AS binary(3)) AS int) as NextID</Value>

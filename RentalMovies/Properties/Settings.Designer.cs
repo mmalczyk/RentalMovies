@@ -25,15 +25,6 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Users ")]
-        public string SelectAllFromUsers {
-            get {
-                return ((string)(this["SelectAllFromUsers"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Users WHERE login=\'[login]\' AND password=\'[password]\';")]
         public string SelectUser {
             get {
@@ -47,15 +38,6 @@ namespace RentalMovies.Properties {
         public string OrderBy {
             get {
                 return ((string)(this["OrderBy"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Users WHERE userId=\'[id]\'")]
-        public string SelectUserByID {
-            get {
-                return ((string)(this["SelectUserByID"]));
             }
         }
         

@@ -59,5 +59,95 @@ namespace RentalMovies.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string badRecordMessage {
+            get {
+                return ResourceManager.GetString("badRecordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string confirmButtonMessage {
+            get {
+                return ResourceManager.GetString("confirmButtonMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string confirmDeleteMessage {
+            get {
+                return ResourceManager.GetString("confirmDeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: .
+        /// </summary>
+        internal static string errorMessage {
+            get {
+                return ResourceManager.GetString("errorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string noUserPickedMessage {
+            get {
+                return ResourceManager.GetString("noUserPickedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string userIdText {
+            get {
+                return ResourceManager.GetString("userIdText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string userLoginText {
+            get {
+                return ResourceManager.GetString("userLoginText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string userNameText {
+            get {
+                return ResourceManager.GetString("userNameText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string userRoleText {
+            get {
+                return ResourceManager.GetString("userRoleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string userSurnameText {
+            get {
+                return ResourceManager.GetString("userSurnameText", resourceCulture);
+            }
+        }
     }
 }

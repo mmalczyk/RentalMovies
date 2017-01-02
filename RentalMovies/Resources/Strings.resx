@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="badRecordMessage" xml:space="preserve">
+    <value>Błędnie wypełniony rekord</value>
+  </data>
+  <data name="confirmButtonMessage" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="confirmDeleteMessage" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć?</value>
+  </data>
+  <data name="errorMessage" xml:space="preserve">
+    <value>Error: </value>
+  </data>
+  <data name="noUserPickedMessage" xml:space="preserve">
+    <value>Nie wybrano użytkownika</value>
+  </data>
+  <data name="userIdText" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="userLoginText" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="userNameText" xml:space="preserve">
+    <value>Imię</value>
+  </data>
+  <data name="userRoleText" xml:space="preserve">
+    <value>Rola</value>
+  </data>
+  <data name="userSurnameText" xml:space="preserve">
+    <value>Nazwisko</value>
+  </data>
 </root>
