@@ -14,7 +14,6 @@ namespace RentalMovies
         {
             InitializeComponent();
             usersTable = new UsersTable();
-            usersTable.SetObjConnect(ref objConnect);
         }
 
         private void Users_Load(object sender, EventArgs e)

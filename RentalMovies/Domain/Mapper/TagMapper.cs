@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RentalMovies.Domain.Records;
+using System;
 
 namespace RentalMovies.Domain.Mapper
 {
-    public class TagMapper : AbstractMapper
+    public class TagMapper : AbstractMapper<DVDTag>
     {
         public void Delete()
         {

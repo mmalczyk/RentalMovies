@@ -6,22 +6,37 @@ using System.Windows.Forms;
 
 namespace RentalMovies
 {
-    public class DatabaseConnection
+    public class DatabaseConnection //+Singleton
     {
+        private static DatabaseConnection soleInstance;
+
         private string sql;
         private string strCon;
         private SqlDataAdapter daUsers;
         private Dictionary<string, object> parameters;
 
+        private DatabaseConnection() { }
+
+
         public string Sql
         {
-            set { this.sql = value; }
+            set { sql = value; }
         }
 
         public string ConnectionString
         {
 
-            set { this.strCon = value; }
+            set { strCon = value; }
+        }
+
+        public static DatabaseConnection SoleInstance
+        {
+            get
+            {
+                if (soleInstance == null)
+                    soleInstance = new DatabaseConnection();
+                return soleInstance;
+            }
         }
 
         public void AddParameter(string name, object value)

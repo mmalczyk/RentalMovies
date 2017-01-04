@@ -18,12 +18,12 @@ namespace RentalMovies
         {
             InitializeComponent();
 
-            this.objConnect = new DatabaseConnection();
-            this.objConnect.ConnectionString = Properties.Settings.Default.DatabaseConnectionString;
+            objConnect = DatabaseConnection.SoleInstance;
+            objConnect.ConnectionString = Properties.Settings.Default.DatabaseConnectionString;
 
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
     }
 }

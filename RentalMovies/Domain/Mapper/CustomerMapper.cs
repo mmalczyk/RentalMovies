@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RentalMovies.Domain.Records;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RentalMovies.Domain.Mapper
 {
-    public class CustomerMapper : AbstractMapper
+    public class CustomerMapper : AbstractMapper<Customer>
     {
         public void Delete()
         {

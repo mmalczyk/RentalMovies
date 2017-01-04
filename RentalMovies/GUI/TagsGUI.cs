@@ -14,8 +14,6 @@ namespace RentalMovies
         {
             InitializeComponent();
             tagsTable = new TagsTable();
-            tagsTable.SetObjConnect(ref objConnect);
-
         }
 
         private void Tags_Load(object sender, EventArgs e)
