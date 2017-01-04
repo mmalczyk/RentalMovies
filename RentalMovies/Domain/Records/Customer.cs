@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace RentalMovies.Domain.Records
 {
-    public class Customer : ActiveRecord
+    public class Customer : AbstractActiveRecord
     {
         private string name;
         private string surname;
         private string pesel;
         private string phone;
         private string address;
+
+        public Customer()
+        {
+            DataObjectType = DataObjectType.Customer;
+        }
 
         public string Name
         {

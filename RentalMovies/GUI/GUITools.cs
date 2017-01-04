@@ -1,4 +1,4 @@
-﻿using RentalMovies.Domain.Records;
+﻿using RentalMovies.Domain;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -8,7 +8,7 @@ namespace RentalMovies.GUI
     public static class GUITools
     {
 
-        public static bool LoadRoles(ref System.Windows.Forms.ListBox listBox, string[] array)
+        public static bool LoadRoles(ref ListBox listBox, string[] array)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace RentalMovies.GUI
             }
         }
 
-        public static void FillList(ref ListView listView, DataRowCollection dataList, ActiveRecord record, string errorMessage="")
+        public static void FillList(ref ListView listView, DataRowCollection dataList, AbstractActiveRecord record, string errorMessage="")
         {
             try
             {

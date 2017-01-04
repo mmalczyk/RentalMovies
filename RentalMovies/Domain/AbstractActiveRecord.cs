@@ -1,10 +1,11 @@
 ﻿using System.Data;
 
-namespace RentalMovies.Domain.Records
+namespace RentalMovies.Domain
 {
-    public abstract class ActiveRecord
+    public abstract class AbstractActiveRecord
     {
         protected string id;
+        private DataObjectType objectType;
 
         public string Id
         {
@@ -18,6 +19,19 @@ namespace RentalMovies.Domain.Records
                 id = value;
             }
         }
+
+        public DataObjectType DataObjectType
+        {
+            get
+            {
+                return objectType;
+            }
+            set
+            {
+                objectType = value;
+            }
+        }
+
 
         public abstract string[] toArray();
         public abstract void init(DataRow dataRow);

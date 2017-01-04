@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace RentalMovies.Domain.Records
 {
-    public class DVDTag : ActiveRecord
+    public class DVDTag : AbstractActiveRecord
     {
+        public DVDTag()
+        {
+            DataObjectType = DataObjectType.DVDTag;
+        }
+
+        public DVDTag(DataRow dataRow)
+        {
+            init(dataRow);
+        }
+
         public static class CategoryListing
         {
             private const string writer = "Writer";
@@ -76,13 +86,6 @@ namespace RentalMovies.Domain.Records
             {
                 category = value;
             }
-        }
-
-        public DVDTag() { }
-
-        public DVDTag(DataRow dataRow)
-        {
-            init(dataRow);
         }
 
         public override string[] toArray()

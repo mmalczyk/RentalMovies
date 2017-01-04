@@ -7,17 +7,21 @@ using System.Threading.Tasks;
 
 namespace RentalMovies.Domain.Records
 {
-    public class Movie : ActiveRecord
+    public class Movie : AbstractActiveRecord
     {
         private string titles;
         private string releaseYear;
         private string country;
         private string cost;
         private string description;
+        public Movie()
+        {
+            DataObjectType = DataObjectType.Movie;
+        }
 
         public override string[] toArray()
         {
-            return new string[] { id, titles, releaseYear, country, cost, description };
+            return new string[] { Id, titles, releaseYear, country, cost, description };
         }
 
         public override void init(DataRow row)

@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace RentalMovies.Domain.Records
 {
-    public class Renting : ActiveRecord
+    public class Renting : AbstractActiveRecord
     {
         private string customerId;
         private string roomID;
         private string date;
+
+        public Renting()
+        {
+            DataObjectType = DataObjectType.Renting;
+        }
 
         public string CustomerId
         {

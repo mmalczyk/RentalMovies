@@ -1,11 +1,8 @@
-﻿
-using RentalMovies.Domain.Records;
-using System;
-using System.Data;
+﻿using System.Data;
 
-namespace RentalMovies.Domain.Tables
+namespace RentalMovies.Domain
 {
-    public abstract class DataTableObject<T> where T: ActiveRecord
+    public abstract class DataTableObject<T> where T: AbstractActiveRecord
     {
         protected DatabaseConnection objConnect;
         protected string selectByIdSql;

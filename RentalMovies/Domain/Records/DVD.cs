@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace RentalMovies.Domain.Records
 {
-    public class DVD : ActiveRecord
+    public class DVD : AbstractActiveRecord
     {
         private string movieId;
         private string status;
+
+        public DVD()
+        {
+            DataObjectType = DataObjectType.DVD;
+        }
+
 
         public override void init(DataRow row)
         {

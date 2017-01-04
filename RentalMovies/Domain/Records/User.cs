@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 
 namespace RentalMovies.Domain.Records
 {
-    public class User : ActiveRecord
+    public class User : AbstractActiveRecord
     {
         private string job;
         private string forename;
@@ -21,11 +17,13 @@ namespace RentalMovies.Domain.Records
         private DateTime _expiryDate;
 
 
-        public User() { }
+        public User() { DataObjectType = DataObjectType.User; }
         public User(DataRow user)
         {
+            DataObjectType = DataObjectType.User;
             init(user);
         }
+        
 
         public string Forename
         {
