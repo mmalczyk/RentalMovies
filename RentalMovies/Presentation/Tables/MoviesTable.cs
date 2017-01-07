@@ -4,22 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
-namespace RentalMovies.Domain.Mapper
+namespace RentalMovies.Domain.Tables
 {
-    public class RentingMapper : AbstractMapper<Renting>
+    public class MoviesTable : DataTableObject<Movie>
     {
-        public void Delete()
+        public override void PopulateRow(Movie obj, ref DataRow row, bool isNew)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert()
+        public override Movie RowToDataObject(DataRow row)
         {
             throw new NotImplementedException();
         }
 
-        public void Update()
+        public override Movie Select(string id)
         {
             throw new NotImplementedException();
         }

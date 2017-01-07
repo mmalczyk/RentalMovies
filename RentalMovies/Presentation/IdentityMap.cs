@@ -51,7 +51,7 @@ namespace RentalMovies.Domain
                 return soleInstance;
             }
         }
-        public static void Add(AbstractActiveRecord arg)
+        public void Add(AbstractActiveRecord arg)
         {
             switch (arg.DataObjectType)
             {
@@ -72,12 +72,12 @@ namespace RentalMovies.Domain
             }
         }
 
-        public static T Get<T>(DataObjectType dataType, string key) where T : AbstractActiveRecord
+        public T Get<T>(DataObjectType dataType, string key) where T : AbstractActiveRecord
         {
             return (T)Convert.ChangeType(GetAbstract<T>(dataType, key), typeof(T));
         }
 
-        private static AbstractActiveRecord GetAbstract<T>(DataObjectType dataType, string key) where T : AbstractActiveRecord
+        private AbstractActiveRecord GetAbstract<T>(DataObjectType dataType, string key) where T : AbstractActiveRecord
         {
             switch (dataType)
             {

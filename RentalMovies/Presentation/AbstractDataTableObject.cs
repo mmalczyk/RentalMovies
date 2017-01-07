@@ -9,20 +9,15 @@ namespace RentalMovies.Domain
         protected string selectAll;
         protected string idParameter;
 
-        public T SelectById(string id)
+        /*
+        public virtual T SelectById(string id)
         {
             return RowToDataObject(Select(id));
         }
+        */
+        public abstract T Select(string id);
 
-        public DataRow Select(string id)
-        {
-            objConnect.Sql = selectByIdSql;
-            objConnect.AddParameter(idParameter, id);
-            DataSet dataSet = objConnect.GetDataSet();
-            return dataSet.Tables[0].Rows[0];
-        }
-
-        public void Add(T obj)
+        public virtual void Add(T obj)
         {
             objConnect.Sql = selectAll;
             DataSet dataSet = objConnect.GetDataSet();
@@ -33,16 +28,18 @@ namespace RentalMovies.Domain
             objConnect.UpdateDatabase(dataSet);
         }
 
-        public void Delete(string id)
+        public virtual void Delete(T id)
         {
+            /*
             objConnect.Sql = selectByIdSql;
             objConnect.AddParameter(idParameter, id);
             DataSet dataSet = objConnect.GetDataSet();
             dataSet.Tables[0].Rows[0].Delete();
             objConnect.UpdateDatabase(dataSet);
+            */
         }
 
-        public void Update(T obj)
+        public virtual void Update(T obj)
         {
             objConnect.Sql = selectByIdSql;
             string parameter = obj.Id;

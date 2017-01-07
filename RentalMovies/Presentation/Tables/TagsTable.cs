@@ -5,8 +5,6 @@ using System.Data;
 
 namespace RentalMovies.Domain.Tables
 {
-
-
     public class TagsTable : DataTableObject<DVDTag>
     {
         private const string categoryParameter = "@category";
@@ -40,6 +38,9 @@ namespace RentalMovies.Domain.Tables
             return new DVDTag(row);
         }
 
-
+        public override DVDTag Select(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

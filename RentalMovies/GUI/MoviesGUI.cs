@@ -388,7 +388,7 @@ namespace RentalMovies
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        string tagid = form.tagID;
+                        string tagid = form.Id;
                         string movieid = MoviesListView.SelectedItems[0].SubItems[0].Text;
                         if (tagid != null)
                         {
@@ -434,7 +434,7 @@ namespace RentalMovies
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        string tagid = form.tagID;
+                        string tagid = form.Id;
                         string movieid = MoviesListView.SelectedItems[0].SubItems[0].Text;
                         if (tagid != null)
                         {
@@ -464,7 +464,7 @@ namespace RentalMovies
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        string tagid = form.tagID;
+                        string tagid = form.Id;
                         string movieid = MoviesListView.SelectedItems[0].SubItems[0].Text;
                         if (tagid != null)
                         {

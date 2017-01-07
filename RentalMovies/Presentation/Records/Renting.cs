@@ -31,7 +31,7 @@ namespace RentalMovies.Domain.Records
             }
         }
 
-        public string RoomID
+        public string DVDId
         {
             get
             {

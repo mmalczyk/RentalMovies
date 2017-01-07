@@ -60,26 +60,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\AbstractMapper.cs" />
-    <Compile Include="Domain\IdentityMap.cs" />
-    <Compile Include="Domain\Mapper\CustomerMapper.cs" />
-    <Compile Include="Domain\Mapper\DVDMapper.cs" />
-    <Compile Include="Domain\Mapper\MovieMapper.cs" />
-    <Compile Include="Domain\Mapper\RentingMapper.cs" />
-    <Compile Include="Domain\Mapper\TagMapper.cs" />
-    <Compile Include="Domain\Mapper\UserMapper.cs" />
-    <Compile Include="Domain\DataObjectType.cs" />
-    <Compile Include="Domain\Records\DVD.cs" />
-    <Compile Include="Domain\Records\Renting.cs" />
-    <Compile Include="Domain\Records\Customer.cs" />
-    <Compile Include="Domain\Records\Movie.cs" />
-    <Compile Include="Domain\Records\DVDTag.cs" />
-    <Compile Include="Domain\Tables\CustomersTable.cs" />
-    <Compile Include="Domain\AbstractDataTableObject.cs" />
-    <Compile Include="Domain\Tables\DVDsTable.cs" />
-    <Compile Include="Domain\Tables\RentingTable.cs" />
-    <Compile Include="Domain\Tables\MoviesTable.cs" />
-    <Compile Include="Domain\Tables\TagsTable.cs" />
-    <Compile Include="Domain\Tables\UsersTable.cs" />
+    <Compile Include="Domain\DataGatewayRegistry.cs" />
+    <Compile Include="Domain\Sorts\UserSort.cs" />
+    <Compile Include="Presentation\IdentityMap.cs" />
+    <Compile Include="Domain\RowDataGateways\CustomerMapper.cs" />
+    <Compile Include="Domain\RowDataGateways\DVDMapper.cs" />
+    <Compile Include="Domain\RowDataGateways\MovieMapper.cs" />
+    <Compile Include="Domain\RowDataGateways\RentingMapper.cs" />
+    <Compile Include="Domain\RowDataGateways\TagMapper.cs" />
+    <Compile Include="Domain\RowDataGateways\UserMapper.cs" />
+    <Compile Include="Presentation\DataObjectType.cs" />
+    <Compile Include="Presentation\Records\DVD.cs" />
+    <Compile Include="Presentation\Records\Renting.cs" />
+    <Compile Include="Presentation\Records\Customer.cs" />
+    <Compile Include="Presentation\Records\Movie.cs" />
+    <Compile Include="Presentation\Records\DVDTag.cs" />
+    <Compile Include="Presentation\Tables\CustomersTable.cs" />
+    <Compile Include="Presentation\AbstractDataTableObject.cs" />
+    <Compile Include="Presentation\Tables\DVDsTable.cs" />
+    <Compile Include="Presentation\Tables\RentingTable.cs" />
+    <Compile Include="Presentation\Tables\MoviesTable.cs" />
+    <Compile Include="Presentation\Tables\TagsTable.cs" />
+    <Compile Include="Presentation\Tables\UsersTable.cs" />
     <Compile Include="GUI\AdministrationGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,7 +107,7 @@
       <DependentUpon>CustomersGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\GUITools.cs" />
-    <Compile Include="Domain\AbstractActiveRecord.cs" />
+    <Compile Include="Presentation\AbstractActiveRecord.cs" />
     <Compile Include="HelperClasses\DatabaseConnection.cs" />
     <Compile Include="HelperClasses\Limits.cs" />
     <Compile Include="GUI\TagGUI.cs">
@@ -148,7 +150,7 @@
     <Compile Include="GUI\TagsGUI.Designer.cs">
       <DependentUpon>TagsGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Domain\Records\User.cs" />
+    <Compile Include="Presentation\Records\User.cs" />
     <Compile Include="GUI\UsersGUI.cs">
       <SubType>Form</SubType>
     </Compile>

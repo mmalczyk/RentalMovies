@@ -2,12 +2,16 @@
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using RentalMovies.Domain.Records;
+using RentalMovies.Domain.Mapper;
+using RentalMovies.Domain;
+using RentalMovies.Domain.Tables;
 
 namespace RentalMovies
 {
     public partial class MainForm : Base
     {
         private User user;
+        private UsersTable usersTable;
 
         private void CorrectTables()
         {
@@ -47,6 +51,8 @@ namespace RentalMovies
         public MainForm()
         {
             InitializeComponent();
+
+            usersTable = new UsersTable();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -77,9 +83,8 @@ namespace RentalMovies
         {
             try
             {
-                this.objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[login]", loginTextBox.Text).Replace("[password]", passwordTextBox.Text);
-                System.Data.DataSet dataSet = objConnect.GetDataSet();
-                if (dataSet.Tables[0].Rows.Count == 0)
+                user = usersTable.FindUser(loginTextBox.Text, passwordTextBox.Text);
+                if (user == null)
                 {
                     //Próba zalogowania odrzucona
                     loginErrorLabel.Text = "Błędny login lub hasło";
@@ -95,8 +100,6 @@ namespace RentalMovies
                     logoutButton.Enabled = true;
 
                     //Zalogowany; przydzielanie uprawnień
-                    User user = new User(dataSet.Tables[0].Rows[0]);
-                    this.user = user;
                     if (user.Job.CompareTo("Edytor") == 0)
                     {
                         MoviesButton.Enabled = true;
@@ -181,7 +184,7 @@ namespace RentalMovies
 
         private void MyAccountButton_Click(object sender, EventArgs e)
         {
-            MyAccount form = new MyAccount(this.user);
+            MyAccount form = new MyAccount(user);
             form.Show();
         }
 

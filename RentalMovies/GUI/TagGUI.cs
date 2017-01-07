@@ -13,7 +13,7 @@ namespace RentalMovies
     public partial class Tag : Base
     {
         
-        public string tagID;
+        public string Id;
         private string category;
 
         public Tag(string category)
@@ -98,7 +98,7 @@ namespace RentalMovies
                 if (this.IsCorrect() == false) MessageBox.Show("Pusty rekord");
                 else
                 {
-                    this.tagID = ListView.SelectedItems[0].SubItems[0].Text.Trim();
+                    this.Id = ListView.SelectedItems[0].SubItems[0].Text.Trim();
                 }
             }
         }

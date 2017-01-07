@@ -29,7 +29,7 @@ namespace RentalMovies
         private void FillUserBoxes()
         {
             UserIDTextBox.Text = user.Id;
-            UserNameTextBox.Text = user.Forename;
+            UserNameTextBox.Text = user.Name;
             UserSurnameTextBox.Text = user.Surname;
             UserLoginTextBox.Text = user.Login;
             UserJobTextBox.Text = user.Job;

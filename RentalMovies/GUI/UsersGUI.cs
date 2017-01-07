@@ -1,5 +1,6 @@
 ﻿using RentalMovies.Domain.Records;
 using RentalMovies.Domain.Tables;
+using RentalMovies.Domain;
 using RentalMovies.GUI;
 using RentalMovies.HelperClasses;
 using System;
@@ -40,15 +41,6 @@ namespace RentalMovies
         {
             GUITools.FillList(ref UsersListView, usersTable.SelectSorted(GetCheckedOrder()), new User(), Resources.Strings.errorMessage+"FillUserList");
         }
-
-        private User GetUserById()
-        {
-            var listItems = UsersListView.SelectedItems;
-            if (listItems != null && listItems.Count > 0)
-                return usersTable.SelectById(listItems[0].Text);
-            return null;
-        }
-
         private string GetCheckedOrder()
         {
             if (SortUserByNameAsc.Checked == true) return usersTable.SortUserByNameAsc;
@@ -79,7 +71,12 @@ namespace RentalMovies
 
         private void UsersListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            FillUserTextBoxes(GetUserById());
+            User user = null;
+            var listItems = UsersListView.SelectedItems;
+            if (listItems != null && listItems.Count > 0)
+                user = usersTable.Select(listItems[0].Text);
+
+            FillUserTextBoxes(user);
         }
 
         private void FillUserTextBoxes(User user)
@@ -87,7 +84,7 @@ namespace RentalMovies
             if (user != null)
             {
                 UserIDTextBox2.Text = user.Id;
-                UserNameTextBox2.Text = user.Forename;
+                UserNameTextBox2.Text = user.Name;
                 UserSurnameTextBox2.Text = user.Surname;
                 UserLoginTextBox2.Text = user.Login;
                 UserPasswordTextBox2.Text = user.Password;
@@ -168,7 +165,9 @@ namespace RentalMovies
             {
                 if (MessageBox.Show(Resources.Strings.confirmDeleteMessage, Resources.Strings.confirmButtonMessage, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    usersTable.Delete(UserIDTextBox2.Text.Trim());
+                    User user = new User();
+                    user.Id = UserIDTextBox2.Text.Trim();
+                    usersTable.Delete(user);
                     ResetUser();
                     FillUserList();
                     ResizeUserListView();

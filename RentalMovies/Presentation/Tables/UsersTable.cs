@@ -1,20 +1,25 @@
-﻿using RentalMovies.Domain.Records;
+﻿using RentalMovies.Domain.Mapper;
+using RentalMovies.Domain.Records;
 using System.Data;
 
 namespace RentalMovies.Domain.Tables
 {
     public class UsersTable : DataTableObject<User>
     {
+        UserMapper UserTableGateway;
+
         public UsersTable()
         {
+            UserTableGateway = DataGatewayRegistry.SoleInstance.UserTableGateway;
+
             selectByIdSql = Properties.Resources.SelectUserById;
             selectAll = Properties.Resources.SelectAllFromUsers;
-            idParameter = "@userId";
+            idParameter = "@id";
         }
 
-        private const string basicSort = " userId ASC ";
-        private const string sortUserByNameAsc = " forename ASC ";
-        private const string sortUserByNameDesc = " forename DESC ";
+        private const string basicSort = " id ASC ";
+        private const string sortUserByNameAsc = " name ASC ";
+        private const string sortUserByNameDesc = " name DESC ";
         private const string sortUserBySurnameAsc = " surname ASC ";
         private const string sortUserBySurnameDesc = " surname DESC ";
         private const string sortUserByJobAsc = " job ASC ";
@@ -76,6 +81,31 @@ namespace RentalMovies.Domain.Tables
             }
         }
 
+        override public User Select(string id)
+        {
+            UserTableGateway.setColumnNames(new string[] { "id" });
+            UserTableGateway.FindParameters.Add("@1", id);
+            return UserTableGateway.Find();
+        }
+
+        public User FindUser(string login, string password)
+        {
+            UserTableGateway.setColumnNames(new string[] { "login", "password" });
+            UserTableGateway.FindParameters.Add("@1", login);
+            UserTableGateway.FindParameters.Add("@2", password);
+            return UserTableGateway.Find();
+        }
+
+        override public void Add(User obj)
+        {
+            UserTableGateway.Insert(obj);
+        }
+
+        override public void Delete(User obj)
+        {
+            UserTableGateway.Delete(obj);
+        }
+
         public DataRowCollection SelectSorted(string order)
         {
             string sql = Properties.Resources.SelectAllFromUsers;
@@ -90,7 +120,7 @@ namespace RentalMovies.Domain.Tables
         {
             if (isNew)
                 row[0] = objConnect.GetNewID();
-            row[1] = user.Forename;
+            row[1] = user.Name;
             row[2] = user.Surname;
             row[3] = user.Login;
             row[4] = user.Password;

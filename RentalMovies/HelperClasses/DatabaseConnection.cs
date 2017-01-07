@@ -13,7 +13,7 @@ namespace RentalMovies
         private string sql;
         private string strCon;
         private SqlDataAdapter daUsers;
-        private Dictionary<string, object> parameters;
+        private Dictionary<string, string> parameters;
 
         private DatabaseConnection() { }
 
@@ -39,10 +39,40 @@ namespace RentalMovies
             }
         }
 
-        public void AddParameter(string name, object value)
+        public Dictionary<string, string> Parameters
         {
-            if (parameters == null) parameters = new Dictionary<string, object>();
-            parameters.Add(name, value);
+            get
+            {
+                if (parameters == null)
+                    parameters = new Dictionary<string, string>();
+                return parameters;
+            }
+            set
+            {
+                parameters = value;
+            }
+        }
+
+        public void AddParameter(string name, string value)
+        {
+            Parameters.Add(name, value);
+        }
+
+        public void Execute()
+        {
+            SqlConnection con = new SqlConnection(strCon);
+            con.Open();
+
+            SqlCommand command = new SqlCommand(sql, con);
+            command.Connection = con;
+            command.CommandText = sql;
+            foreach (var pair in Parameters)
+                command.Parameters.AddWithValue(pair.Key, pair.Value);
+            command.ExecuteNonQuery();
+            
+            //wipe parameters after you're done
+            Parameters = null;
+            con.Close();
         }
 
         public DataSet GetDataSet()
@@ -51,26 +81,26 @@ namespace RentalMovies
             SqlConnection con = new SqlConnection(strCon);
             con.Open();
 
-            if (parameters == null)
+            if (Parameters == null)
                 daUsers = new SqlDataAdapter(sql, con);
             else
             {
                 SqlCommand command = new SqlCommand(sql, con);
                 command.Connection = con;
                 command.CommandText = sql;
-                foreach (var pair in parameters)
+                foreach (var pair in Parameters)
                     command.Parameters.AddWithValue(pair.Key, pair.Value);
-                command.CommandType = CommandType.Text;
 
                 daUsers = new SqlDataAdapter(command);
 
                 //wipe parameters after you're done
-                parameters = null;
+                Parameters = null;
             }
 
             DataSet dataSet = new DataSet();
             daUsers.Fill(dataSet, "dataSet");
             con.Close();
+
             return dataSet;
         }
 

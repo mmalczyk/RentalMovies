@@ -25,7 +25,7 @@ namespace RentalMovies.Domain.Records
         }
         
 
-        public string Forename
+        public string Name
         {
             get
             {
@@ -112,7 +112,7 @@ namespace RentalMovies.Domain.Records
         public override void init(DataRow user)
         {
             this.Id = user.ItemArray.GetValue(0).ToString().Trim();
-            this.Forename = user.ItemArray.GetValue(1).ToString().Trim();
+            this.Name = user.ItemArray.GetValue(1).ToString().Trim();
             this.Surname = user.ItemArray.GetValue(2).ToString().Trim();
             this.Login = user.ItemArray.GetValue(3).ToString().Trim();
             this.Password = user.ItemArray.GetValue(4).ToString().Trim();
@@ -127,7 +127,7 @@ namespace RentalMovies.Domain.Records
 
         public override string[] toArray()
         {
-            return new string[] { Id.Trim(), Forename, Surname, Login, Job };
+            return new string[] { Id.Trim(), Name, Surname, Login, Job };
         }
 
         public DateTime ExpiryDate
@@ -165,7 +165,7 @@ namespace RentalMovies.Domain.Records
         //komunikat błędu dostępny w this.ErrorMessage        
         public User Update(string forename, string surname, string login, string role)
         {
-            this.Forename = forename.Trim();
+            this.Name = forename.Trim();
             this.Surname = surname.Trim();
             this.Login = login.Trim();
             this.Job = role.Trim();
@@ -190,8 +190,8 @@ namespace RentalMovies.Domain.Records
             if (this.ErrorMessage < 5)
             {
                 if (Id == null && this.IsUnique() == false) this.ErrorMessage = 4;
-                if (Forename == null || Surname == null || Login == null || Job == null) this.ErrorMessage = 1;
-                if (Empty(Forename) || Empty(Surname) || Empty(Login) || Empty(Job)) this.ErrorMessage = 2;
+                if (Name == null || Surname == null || Login == null || Job == null) this.ErrorMessage = 1;
+                if (Empty(Name) || Empty(Surname) || Empty(Login) || Empty(Job)) this.ErrorMessage = 2;
                 if (Login.Trim().Length < 3) this.ErrorMessage = 3;
             }
             else this.ErrorMessage = 0;
