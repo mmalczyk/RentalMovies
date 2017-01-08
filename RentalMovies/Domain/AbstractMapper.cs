@@ -157,6 +157,7 @@ namespace RentalMovies.Domain
 
         public virtual void Update(T obj)
         {
+            setupConnection(updateSQL, UpdateParameters);
             objConnect.Execute();
             UpdateParameters.Clear();
         }

@@ -106,6 +106,10 @@ namespace RentalMovies.Domain.Tables
             UserTableGateway.Delete(obj);
         }
 
+        override public void Update (User obj)
+        {
+            UserTableGateway.Update(obj);
+        }
         public DataRowCollection SelectSorted(string order)
         {
             string sql = Properties.Resources.SelectAllFromUsers;

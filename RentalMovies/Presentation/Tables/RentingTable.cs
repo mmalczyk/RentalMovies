@@ -10,6 +10,16 @@ namespace RentalMovies.Domain.Tables
 {
     public class RentingTable : DataTableObject<Renting>
     {
+        public override void Add(Renting obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(Renting id)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void PopulateRow(Renting obj, ref DataRow row, bool isNew)
         {
             throw new NotImplementedException();
@@ -21,6 +31,11 @@ namespace RentalMovies.Domain.Tables
         }
 
         public override Renting Select(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(Renting obj)
         {
             throw new NotImplementedException();
         }

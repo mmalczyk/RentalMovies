@@ -42,5 +42,20 @@ namespace RentalMovies.Domain.Tables
         {
             throw new NotImplementedException();
         }
+
+        public override void Add(DVDTag obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(DVDTag id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(DVDTag obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -61,5 +61,17 @@ namespace RentalMovies.Domain.Mapper
             base.Insert(obj);
         }
 
+        public override void Update(User obj)
+        {
+            UpdateParameters.Add("@1", obj.Id);
+            UpdateParameters.Add("@2", obj.Name);
+            UpdateParameters.Add("@3", obj.Surname);
+            UpdateParameters.Add("@4", obj.Login);
+            UpdateParameters.Add("@5", obj.Password);
+            UpdateParameters.Add("@6", obj.Job);
+            UpdateParameters.Add("@7", obj.Id);
+            base.Update(obj);
+        }
+
     }
 }
