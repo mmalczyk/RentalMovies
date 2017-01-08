@@ -48,5 +48,18 @@ namespace RentalMovies.Domain.Mapper
             dataType = DataObjectType.User;
         }
 
+        public override void Insert(User obj)
+        {
+            string newId = objConnect.GetNewID();
+            obj.Id = newId;
+            InsertParameters.Add("@1", newId);
+            InsertParameters.Add("@2", obj.Name);
+            InsertParameters.Add("@3", obj.Surname);
+            InsertParameters.Add("@4", obj.Login);
+            InsertParameters.Add("@5", obj.Password);
+            InsertParameters.Add("@6", obj.Job);
+            base.Insert(obj);
+        }
+
     }
 }

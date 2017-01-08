@@ -150,30 +150,32 @@ namespace RentalMovies.Domain
         public virtual DataSet FindAll()
         {
             setupConnection(findAllSQL, FindAllParameters);
+            var dataSet = objConnect.GetDataSet();
             FindAllParameters.Clear();
-            return objConnect.GetDataSet();
+            return dataSet;
         }
 
         public virtual void Update(T obj)
         {
-            UpdateParameters.Clear();
             objConnect.Execute();
+            UpdateParameters.Clear();
         }
 
         public virtual void Delete(T obj)
         {
-            //TODO identityMap delete
+            IdentityMap.SoleInstance.Delete(obj);
+            DeleteParameters.Add("@1", obj.Id);
             setupConnection(deleteSQL, DeleteParameters);
-            DeleteParameters.Clear();
             objConnect.Execute();
+            DeleteParameters.Clear();
         }
 
         public virtual void Insert(T obj)
         {
             IdentityMap.SoleInstance.Add(obj);
             setupConnection(insertSQL, InsertParameters);
-            InsertParameters.Clear();
             objConnect.Execute();
+            InsertParameters.Clear();
         }
 
         private void initSQLStrings()
@@ -201,20 +203,19 @@ namespace RentalMovies.Domain
 
         private void initFindAllSQL()
         {
-            string sql = " SELECT * FROM " + tableName + " ORDER BY @1";
+            string sql = " SELECT * FROM " + tableName + " ORDER BY @1 ";
             findAllSQL = sql;
         }
 
         private void initUpdateSQL()
         {
-            initColumnNames();
             string sql = " UPDATE " + tableName + " SET ";
             int i = 1;
             for (; i <= columnNames.Count; i++)
                 sql += columnNames[i-1] + " = @" + i +  ", ";
             if (i>0)
                 sql = sql.Substring(0, sql.Length - 2);
-            sql += "WHERE " + idName + " = @" + i + " ";
+            sql += " WHERE " + idName + " = @" + i + " ";
             updateSQL = sql;
         }
 
@@ -226,8 +227,7 @@ namespace RentalMovies.Domain
 
         private void initInsert()
         {
-            initColumnNames();
-            string sql = " INSERT INTO" + tableName + " VALUES ( ";
+            string sql = " INSERT INTO " + tableName + " VALUES ( ";
             int i = 1;
             for (; i <= columnNames.Count; i++)
                 sql += " @" + i + " , ";

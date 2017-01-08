@@ -155,10 +155,11 @@ namespace RentalMovies.Domain.Records
         //konto jest z założenia expired
         public User(string forename, string surname, string login, string password, string role)
         {
-            this.Unblock();
-            this.ChangePassword(password);
-            this.ExpiryDate = DateTime.Now;
-            this.Update(forename, surname, login, role);
+            DataObjectType = DataObjectType.User;
+            Unblock();
+            ChangePassword(password);
+            ExpiryDate = DateTime.Now;
+            Update(forename, surname, login, role);
         }
 
         //sprawdza poprawność przed update, w wypadku błędów nie dokonuje aktualizacji

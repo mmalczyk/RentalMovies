@@ -17,11 +17,10 @@ namespace RentalMovies.Domain
 
         private static class MapTool<T> where T : AbstractActiveRecord
         {
-            public static void Add(ref Dictionary<string, T> dict, ref AbstractActiveRecord arg)
+            public static void Add(ref Dictionary<string, T> dict, ref T arg)
             {
-                if (dict.ContainsKey(arg.Id))
-                    dict.Remove(arg.Id);
-                dict.Add(arg.Id, (T)Convert.ChangeType(arg, typeof(T)));
+                dict.Remove(arg.Id);
+                dict.Add(arg.Id, arg);
             }
             public static T Get(ref Dictionary<string, T> dict, string key)
             {
@@ -29,7 +28,6 @@ namespace RentalMovies.Domain
                 dict.TryGetValue(key, out value);
                 return value;
             }
-
         }
 
         private IdentityMap()
@@ -56,17 +54,35 @@ namespace RentalMovies.Domain
             switch (arg.DataObjectType)
             {
                 case DataObjectType.Customer:
-                    MapTool<Customer>.Add(ref soleInstance.CustomerMap, ref arg); break;
+                    {
+                        var x = (Customer) arg;
+                        MapTool<Customer>.Add(ref soleInstance.CustomerMap, ref x); break;
+                    }
                 case DataObjectType.DVD:
-                    MapTool<DVD>.Add(ref soleInstance.DVDMap, ref arg); break;
+                    {
+                        var x = (DVD) arg;
+                        MapTool<DVD>.Add(ref soleInstance.DVDMap, ref x); break;
+                    }
                 case DataObjectType.DVDTag:
-                    MapTool<DVDTag>.Add(ref soleInstance.DVDTagMap, ref arg); break;
+                    {
+                        var x = (DVDTag)arg;
+                        MapTool<DVDTag>.Add(ref soleInstance.DVDTagMap, ref x); break;
+                    }
                 case DataObjectType.Movie:
-                    MapTool<Movie>.Add(ref soleInstance.MovieMap, ref arg); break;
+                    {
+                        var x = (Movie)arg;
+                        MapTool<Movie>.Add(ref soleInstance.MovieMap, ref x); break;
+                    }
                 case DataObjectType.Renting:
-                    MapTool<Renting>.Add(ref soleInstance.RentingMap, ref arg); break;
+                    {
+                        var x = (Renting)arg;
+                        MapTool<Renting>.Add(ref soleInstance.RentingMap, ref x); break;
+                    }
                 case DataObjectType.User:
-                    MapTool<User>.Add(ref soleInstance.UserMap, ref arg); break;
+                    {
+                        var x = (User)arg;
+                        MapTool<User>.Add(ref soleInstance.UserMap, ref x); break;
+                    }
                 default:
                     throw new NotImplementedException();
             }
@@ -97,5 +113,29 @@ namespace RentalMovies.Domain
                     throw new NotImplementedException();
             }
         }
+
+        public bool Delete(AbstractActiveRecord record)
+        {
+            var dataType = record.DataObjectType;
+            var key = record.Id;
+            switch (dataType)
+            {
+                case DataObjectType.Customer:
+                    return soleInstance.CustomerMap.Remove(key);
+                case DataObjectType.DVD:
+                    return soleInstance.DVDMap.Remove(key);
+                case DataObjectType.DVDTag:
+                    return soleInstance.DVDTagMap.Remove(key);
+                case DataObjectType.Movie:
+                    return soleInstance.MovieMap.Remove(key);
+                case DataObjectType.Renting:
+                    return soleInstance.RentingMap.Remove(key);
+                case DataObjectType.User:
+                    return soleInstance.UserMap.Remove(key);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
     }
 }
