@@ -1,9 +1,5 @@
 ﻿using RentalMovies.Domain.Records;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 
 namespace RentalMovies.Domain.Mapper

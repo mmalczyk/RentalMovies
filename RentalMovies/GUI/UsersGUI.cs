@@ -5,6 +5,7 @@ using RentalMovies.GUI;
 using RentalMovies.HelperClasses;
 using System;
 using System.Windows.Forms;
+using RentalMovies.Domain.Sorts;
 
 namespace RentalMovies
 {
@@ -39,17 +40,17 @@ namespace RentalMovies
 
         private void FillUserList()
         {
-            GUITools.FillList(ref UsersListView, usersTable.SelectSorted(GetCheckedOrder()), new User(), Resources.Strings.errorMessage+"FillUserList");
+            GUITools.FillList(ref UsersListView, usersTable.FindAll(GetCheckedOrder()), new User(), Resources.Strings.errorMessage+"FillUserList");
         }
         private string GetCheckedOrder()
         {
-            if (SortUserByNameAsc.Checked == true) return usersTable.SortUserByNameAsc;
-            if (SortUserByNameDesc.Checked == true) return usersTable.SortUserByNameDesc;
-            if (SortUserBySurnameAsc.Checked == true) return usersTable.SortUserBySurnameAsc;
-            if (SortUserBySurnameDesc.Checked == true) return usersTable.SortUserBySurnameDesc;
-            if (SortUserByJobAsc.Checked == true) return usersTable.SortUserByJobAsc;
-            if (SortUserByJobDesc.Checked == true) return usersTable.SortUserByJobDesc;
-            return usersTable.BasicSort;
+            if (SortUserByNameAsc.Checked == true) return UserSort.SortUserByNameAsc;
+            if (SortUserByNameDesc.Checked == true) return UserSort.SortUserByNameDesc;
+            if (SortUserBySurnameAsc.Checked == true) return UserSort.SortUserBySurnameAsc;
+            if (SortUserBySurnameDesc.Checked == true) return UserSort.SortUserBySurnameDesc;
+            if (SortUserByJobAsc.Checked == true) return UserSort.SortUserByJobAsc;
+            if (SortUserByJobDesc.Checked == true) return UserSort.SortUserByJobDesc;
+            return UserSort.BasicSort;
         }
 
         private void ResetUser()
@@ -187,7 +188,7 @@ namespace RentalMovies
                 {
                     usersTable.Update(user);
                     FillUserList();
-                    this.ResizeUserListView();
+                    ResizeUserListView();
                 }
             }
         }

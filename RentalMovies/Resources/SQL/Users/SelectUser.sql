@@ -1,1 +1,0 @@
-SELECT * FROM Users WHERE login=@login AND password=@password

@@ -221,15 +221,6 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Users.
-        /// </summary>
-        internal static string SelectAllFromUsers {
-            get {
-                return ResourceManager.GetString("SelectAllFromUsers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to SELECT * FROM MoviesTags.
         /// </summary>
         internal static string SelectAllMoviesTags {
@@ -331,24 +322,6 @@ namespace RentalMovies.Properties {
         internal static string SelectTagsByMovieID {
             get {
                 return ResourceManager.GetString("SelectTagsByMovieID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Users WHERE login=@login AND password=@password.
-        /// </summary>
-        internal static string SelectUser {
-            get {
-                return ResourceManager.GetString("SelectUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Users WHERE userId=@userId.
-        /// </summary>
-        internal static string SelectUserById {
-            get {
-                return ResourceManager.GetString("SelectUserById", resourceCulture);
             }
         }
     }

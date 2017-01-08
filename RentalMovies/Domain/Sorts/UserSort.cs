@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RentalMovies.Domain.Sorts
 {
-    public class UserSort
+    public static class UserSort
     {
         private const string basicSort = " id ASC ";
         private const string sortUserByNameAsc = " name ASC ";
@@ -16,7 +16,7 @@ namespace RentalMovies.Domain.Sorts
         private const string sortUserByJobAsc = " job ASC ";
         private const string sortUserByJobDesc = " job DESC ";
 
-        public string BasicSort
+        public static string BasicSort
         {
             get
             {
@@ -24,7 +24,7 @@ namespace RentalMovies.Domain.Sorts
             }
         }
 
-        public string SortUserByNameAsc
+        public static string SortUserByNameAsc
         {
             get
             {
@@ -32,7 +32,7 @@ namespace RentalMovies.Domain.Sorts
             }
         }
 
-        public string SortUserByNameDesc
+        public static string SortUserByNameDesc
         {
             get
             {
@@ -40,7 +40,7 @@ namespace RentalMovies.Domain.Sorts
             }
         }
 
-        public string SortUserBySurnameAsc
+        public static string SortUserBySurnameAsc
         {
             get
             {
@@ -48,7 +48,7 @@ namespace RentalMovies.Domain.Sorts
             }
         }
 
-        public string SortUserBySurnameDesc
+        public static string SortUserBySurnameDesc
         {
             get
             {
@@ -56,7 +56,7 @@ namespace RentalMovies.Domain.Sorts
             }
         }
 
-        public string SortUserByJobAsc
+        public static string SortUserByJobAsc
         {
             get
             {
@@ -64,7 +64,7 @@ namespace RentalMovies.Domain.Sorts
             }
         }
 
-        public string SortUserByJobDesc
+        public static string SortUserByJobDesc
         {
             get
             {

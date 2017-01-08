@@ -11,76 +11,7 @@ namespace RentalMovies.Domain.Tables
         public UsersTable()
         {
             UserTableGateway = DataGatewayRegistry.SoleInstance.UserTableGateway;
-
-            selectByIdSql = Properties.Resources.SelectUserById;
-            selectAll = Properties.Resources.SelectAllFromUsers;
-            idParameter = "@id";
         }
-
-        private const string basicSort = " id ASC ";
-        private const string sortUserByNameAsc = " name ASC ";
-        private const string sortUserByNameDesc = " name DESC ";
-        private const string sortUserBySurnameAsc = " surname ASC ";
-        private const string sortUserBySurnameDesc = " surname DESC ";
-        private const string sortUserByJobAsc = " job ASC ";
-        private const string sortUserByJobDesc = " job DESC ";
-
-        public string BasicSort
-        {
-            get
-            {
-                return basicSort;
-            }
-        }
-
-        public string SortUserByNameAsc
-        {
-            get
-            {
-                return sortUserByNameAsc;
-            }
-        }
-
-        public string SortUserByNameDesc
-        {
-            get
-            {
-                return sortUserByNameDesc;
-            }
-        }
-
-        public string SortUserBySurnameAsc
-        {
-            get
-            {
-                return sortUserBySurnameAsc;
-            }
-        }
-
-        public string SortUserBySurnameDesc
-        {
-            get
-            {
-                return sortUserBySurnameDesc;
-            }
-        }
-
-        public string SortUserByJobAsc
-        {
-            get
-            {
-                return sortUserByJobAsc;
-            }
-        }
-
-        public string SortUserByJobDesc
-        {
-            get
-            {
-                return sortUserByJobDesc;
-            }
-        }
-
         override public User Select(string id)
         {
             UserTableGateway.setColumnNames(new string[] { "id" });
@@ -110,14 +41,10 @@ namespace RentalMovies.Domain.Tables
         {
             UserTableGateway.Update(obj);
         }
-        public DataRowCollection SelectSorted(string order)
+        public DataRowCollection FindAll(string order)
         {
-            string sql = Properties.Resources.SelectAllFromUsers;
-            if (order != null)
-                sql += Properties.Settings.Default.OrderBy + order;
-            objConnect.Sql = sql;
-            DataSet dataSet = objConnect.GetDataSet();
-            return dataSet.Tables[0].Rows;
+            UserTableGateway.FindAllParameters.Add("@1", order);
+            return UserTableGateway.FindAll();
         }
 
         override public void PopulateRow(User user, ref DataRow row, bool isNew)

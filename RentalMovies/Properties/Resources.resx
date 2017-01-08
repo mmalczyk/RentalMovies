@@ -166,9 +166,6 @@
   <data name="SelectAllFromMovies" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sql\moviequeries\selectallfrommovies.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
-  <data name="SelectAllFromUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\sql\users\selectallfromusers.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
-  </data>
   <data name="SelectAllMoviesTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sql\tags\selectallmoviestags.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
@@ -201,11 +198,5 @@
   </data>
   <data name="SelectTagsByMovieID" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\sql\tags\selecttagsbymovieid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
-  </data>
-  <data name="SelectUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\sql\users\selectuser.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
-  </data>
-  <data name="SelectUserById" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\sql\users\selectuserbyid.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
 </root>

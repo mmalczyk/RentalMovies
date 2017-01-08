@@ -1,4 +1,5 @@
 ﻿using RentalMovies.Domain.Records;
+using RentalMovies.Domain.Tables;
 using System;
 using System.Windows.Forms;
 
@@ -7,10 +8,12 @@ namespace RentalMovies
     public partial class MyAccount : Base
     {
         private User user;
+        private UsersTable usersTable;
 
         public MyAccount(User user)
         {
             this.user = user;
+            UsersTable usersTable = new UsersTable();
             InitializeComponent();
         }
 
@@ -23,7 +26,7 @@ namespace RentalMovies
             RepeatedPasswordTextBox.PasswordChar = '*';
             RepeatedPasswordTextBox.MaxLength = 10;
 
-            this.FillUserBoxes();
+            FillUserBoxes();
         }
 
         private void FillUserBoxes()
@@ -42,16 +45,26 @@ namespace RentalMovies
             {
                 try
                 {
-                    this.objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[password]", CurrentPasswordTextBox.Text).Replace("[login]", user.Login);
+                    user = usersTable.FindUser(user.Login, CurrentPasswordTextBox.Text);
+
+                    /*
+                    objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[password]", CurrentPasswordTextBox.Text).Replace("[login]", user.Login);
                     System.Data.DataSet dataSet = objConnect.GetDataSet();
                     if (dataSet.Tables[0].Rows.Count == 0) PasswordChangeLabel.Text = "Błędne stare hasło";
+                    */
+                    if (user == null)
+                        PasswordChangeLabel.Text = "Błędne stare hasło";
                     else
                     {
+                        user.Password = NewPasswordTextBox.Text;
+                        usersTable.Update(user);
+                        /*
                         var dataRow = dataSet.Tables[0].Rows[0];
                         dataRow.BeginEdit();
                         dataRow[4] = NewPasswordTextBox.Text;
                         dataRow.EndEdit();
                         objConnect.UpdateDatabase(dataSet);
+                        */
                         PasswordChangeLabel.Text = "";
                         CurrentPasswordTextBox.Text = "";
                         NewPasswordTextBox.Text = "";

@@ -57,7 +57,7 @@ namespace RentalMovies
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.ResetForm();
+            ResetForm();
 
             passwordTextBox.PasswordChar = '*';
             passwordTextBox.MaxLength = 10;

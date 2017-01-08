@@ -11,9 +11,6 @@ namespace RentalMovies.Domain.Tables
 
         public TagsTable()
         {
-            selectByIdSql = Properties.Resources.SelectTagByID;
-            selectAll = Properties.Resources.SelectAllTags;
-            idParameter = "@id";
         }
 
         public DataRowCollection SelectSorted(string category)

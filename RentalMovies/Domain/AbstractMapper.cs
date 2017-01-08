@@ -147,12 +147,12 @@ namespace RentalMovies.Domain
             FindParameters.Clear();
             return dataObject;
         }
-        public virtual DataSet FindAll()
+        public virtual DataRowCollection FindAll()
         {
-            setupConnection(findAllSQL, FindAllParameters);
-            var dataSet = objConnect.GetDataSet();
+            initFindAllSQL();
             FindAllParameters.Clear();
-            return dataSet;
+            setupConnection(findAllSQL, FindAllParameters);
+            return objConnect.GetDataSet().Tables[0].Rows;
         }
 
         public virtual void Update(T obj)
@@ -204,7 +204,12 @@ namespace RentalMovies.Domain
 
         private void initFindAllSQL()
         {
-            string sql = " SELECT * FROM " + tableName + " ORDER BY @1 ";
+            string order;
+            if (FindAllParameters.Count > 0)
+                order = FindAllParameters["@1"];
+            else
+                order = "id ASC";
+            string sql = " SELECT * FROM " + tableName + " ORDER BY " + order;
             findAllSQL = sql;
         }
 
