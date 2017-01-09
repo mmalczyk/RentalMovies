@@ -40,5 +40,25 @@ namespace RentalMovies.Domain.Mapper
         {
             dataType = DataObjectType.DVD;
         }
+
+        public override void Insert(DVD obj)
+        {
+            string newId = objConnect.GetNewID();
+            obj.Id = newId;
+            InsertParameters.Add("@1", newId);
+            InsertParameters.Add("@2", obj.MovieId);
+            InsertParameters.Add("@3", obj.Status);
+            base.Insert(obj);
+        }
+
+        public override void Update(DVD obj)
+        {
+            UpdateParameters.Add("@1", obj.Id);
+            UpdateParameters.Add("@2", obj.MovieId);
+            UpdateParameters.Add("@3", obj.Status);
+            UpdateParameters.Add("@4", obj.Id);
+            base.Update(obj);
+        }
+
     }
 }

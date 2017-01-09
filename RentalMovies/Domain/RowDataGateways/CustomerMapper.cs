@@ -47,5 +47,31 @@ namespace RentalMovies.Domain.Mapper
         {
             dataType = DataObjectType.Customer;
         }
+
+        public override void Insert(Customer obj)
+        {
+            string newId = objConnect.GetNewID();
+            obj.Id = newId;
+            InsertParameters.Add("@1", newId);
+            InsertParameters.Add("@2", obj.Name);
+            InsertParameters.Add("@3", obj.Surname);
+            InsertParameters.Add("@4", obj.Pesel);
+            InsertParameters.Add("@5", obj.Phone);
+            InsertParameters.Add("@6", obj.Address);
+            base.Insert(obj);
+        }
+
+        public override void Update(Customer obj)
+        {
+            UpdateParameters.Add("@1", obj.Id);
+            UpdateParameters.Add("@2", obj.Name);
+            UpdateParameters.Add("@3", obj.Surname);
+            UpdateParameters.Add("@4", obj.Pesel);
+            UpdateParameters.Add("@5", obj.Phone);
+            UpdateParameters.Add("@6", obj.Address);
+            UpdateParameters.Add("@7", obj.Id);
+            base.Update(obj);
+        }
+
     }
 }

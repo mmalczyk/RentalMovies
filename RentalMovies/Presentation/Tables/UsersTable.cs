@@ -6,7 +6,7 @@ namespace RentalMovies.Domain.Tables
 {
     public class UsersTable : DataTableObject<User>
     {
-        UserMapper UserTableGateway;
+        private UserMapper UserTableGateway;
 
         public UsersTable()
         {

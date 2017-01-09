@@ -20,30 +20,30 @@ namespace RentalMovies
         {
             GenreListView.View = View.Details;
             GenreListView.Columns.Add(Resources.Strings.tagsText, -2, HorizontalAlignment.Center);
-            this.FillGenreList();
+            FillGenreList();
 
             ActorsListView.View = View.Details;
             ActorsListView.Columns.Add(Resources.Strings.tagsText, -2, HorizontalAlignment.Center);
-            this.FillActorsList();
+            FillActorsList();
 
             DirectorListView.View = View.Details;
             DirectorListView.Columns.Add(Resources.Strings.tagsText, -2, HorizontalAlignment.Center);
-            this.FillDirectorList();
+            FillDirectorList();
         }
 
         private void FillGenreList()
         {
-            GUITools.FillList(ref GenreListView, tagsTable.SelectSorted(DVDTag.CategoryListing.Genre), new DVDTag(), "Error: FillGenreList");
+            GUITools.FillList(ref GenreListView, tagsTable.FindAll(DVDTag.CategoryListing.Genre), new DVDTag(), "Error: FillGenreList");
         }
 
         private void FillActorsList()
         {
-            GUITools.FillList(ref ActorsListView, tagsTable.SelectSorted(DVDTag.CategoryListing.Actor), new DVDTag(), "Error: FillActorsList");
+            GUITools.FillList(ref ActorsListView, tagsTable.FindAll(DVDTag.CategoryListing.Actor), new DVDTag(), "Error: FillActorsList");
         }
 
         private void FillDirectorList()
         {
-            GUITools.FillList(ref DirectorListView, tagsTable.SelectSorted(DVDTag.CategoryListing.Writer), new DVDTag(), "Error: FillDirectorList");
+            GUITools.FillList(ref DirectorListView, tagsTable.FindAll(DVDTag.CategoryListing.Writer), new DVDTag(), "Error: FillDirectorList");
         }
 
         private bool GenreIsCorrect()
@@ -140,10 +140,10 @@ namespace RentalMovies
                 if (GenreIsCorrect() == false) MessageBox.Show(Resources.Strings.emptyTagText);
                 else
                 {
-                     var selectedItem = GenreListView.SelectedItems[0];
+                    var selectedItem = GenreListView.SelectedItems[0];
                     var newTag = new DVDTag();
                     newTag.Id = selectedItem.SubItems[1].Text.Trim();
-                    newTag.Name = selectedItem.SubItems[0].Text.Trim();
+                    newTag.Name = GenreTextBox.Text.Trim();
                     newTag.Category = DVDTag.CategoryListing.Genre;
                     tagsTable.Update(newTag);
                     FillGenreList();
@@ -164,7 +164,7 @@ namespace RentalMovies
                     var selectedItem = ActorsListView.SelectedItems[0];
                     var newTag = new DVDTag();
                     newTag.Id = selectedItem.SubItems[1].Text.Trim();
-                    newTag.Name = selectedItem.SubItems[0].Text.Trim();
+                    newTag.Name = ActorTextBox.Text.Trim();
                     newTag.Category = DVDTag.CategoryListing.Actor;
                     tagsTable.Update(newTag);
                     FillActorsList();
@@ -184,7 +184,7 @@ namespace RentalMovies
                     var selectedItem = DirectorListView.SelectedItems[0];
                     var newTag = new DVDTag();
                     newTag.Id = selectedItem.SubItems[1].Text.Trim();
-                    newTag.Name = selectedItem.SubItems[0].Text.Trim();
+                    newTag.Name = DirectorTextBox.Text.Trim();
                     newTag.Category = DVDTag.CategoryListing.Writer;
                     tagsTable.Update(newTag);
                     FillDirectorList();
@@ -200,25 +200,11 @@ namespace RentalMovies
             {
                 if (MessageBox.Show(Resources.Strings.confirmDeleteMessage, Resources.Strings.confirmButtonMessage, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    try
-                    {
-                        this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagID.Replace("[id]", GenreListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetDataSet();
-                        var rows = dataSet.Tables[0].Rows;
-                        foreach (DataRow row in rows) row.Delete();
-                        objConnect.UpdateDatabase(dataSet);
-
-                        this.objConnect.Sql = Properties.Settings.Default.SelectTagByID.Replace("[id]", GenreListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        dataSet = objConnect.GetDataSet();
-                        dataSet.Tables[0].Rows[0].Delete();
-                        objConnect.UpdateDatabase(dataSet);
-                        this.FillGenreList();
-                        this.ResizeTagListView();
-                    }
-                    catch (Exception f)
-                    {
-                        MessageBox.Show(f.Message + "Error: DeleteGenreButton_Click");
-                    }
+                    var tag = new DVDTag();
+                    tag.Id = GenreListView.SelectedItems[0].SubItems[1].Text.Trim();
+                    tagsTable.Delete(tag);
+                    FillGenreList();
+                    ResizeTagListView();
                 }
             }        
         }
@@ -230,25 +216,11 @@ namespace RentalMovies
             {
                 if (MessageBox.Show(Resources.Strings.confirmDeleteMessage, Resources.Strings.confirmButtonMessage, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    try
-                    {
-                        this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagID.Replace("[id]", ActorsListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetDataSet();
-                        var rows = dataSet.Tables[0].Rows;
-                        foreach (DataRow row in rows) row.Delete();
-                        objConnect.UpdateDatabase(dataSet);
-
-                        this.objConnect.Sql = Properties.Settings.Default.SelectTagByID.Replace("[id]", ActorsListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        dataSet = objConnect.GetDataSet();
-                        dataSet.Tables[0].Rows[0].Delete();
-                        objConnect.UpdateDatabase(dataSet);
-                        this.FillActorsList();
-                        this.ResizeTagListView();
-                    }
-                    catch (Exception f)
-                    {
-                        MessageBox.Show(f.Message + "Error: DeleteActorButton_Click");
-                    }
+                    var tag = new DVDTag();
+                    tag.Id = ActorsListView.SelectedItems[0].SubItems[1].Text.Trim();
+                    tagsTable.Delete(tag);
+                    FillActorsList();
+                    ResizeTagListView();
                 }
             }
         }
@@ -260,26 +232,11 @@ namespace RentalMovies
             {
                 if (MessageBox.Show(Resources.Strings.confirmDeleteMessage, Resources.Strings.confirmButtonMessage, MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    try
-                    {
-                        this.objConnect.Sql = Properties.Settings.Default.SelectMoviesTagsByTagID.Replace("[id]", DirectorListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        System.Data.DataSet dataSet = objConnect.GetDataSet();
-                        var rows = dataSet.Tables[0].Rows;
-                        foreach (DataRow row in rows) row.Delete();
-                        objConnect.UpdateDatabase(dataSet);
-
-                        this.objConnect.Sql = Properties.Settings.Default.SelectTagByID.Replace("[id]", DirectorListView.SelectedItems[0].SubItems[1].Text.Trim());
-                        dataSet = objConnect.GetDataSet();
-                        dataSet.Tables[0].Rows[0].Delete();
-                        objConnect.UpdateDatabase(dataSet);
-                        this.FillDirectorList();
-                        this.ResizeTagListView();
-
-                    }
-                    catch (Exception f)
-                    {
-                        MessageBox.Show(f.Message + "Error: DeleteDirectorButton_Click");
-                    }
+                    var tag = new DVDTag();
+                    tag.Id = DirectorListView.SelectedItems[0].SubItems[1].Text.Trim();
+                    tagsTable.Delete(tag);
+                    FillDirectorList();
+                    ResizeTagListView();
                 }
             }
         }

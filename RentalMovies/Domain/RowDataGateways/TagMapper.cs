@@ -36,5 +36,31 @@ namespace RentalMovies.Domain.Mapper
         {
             dataType = DataObjectType.DVDTag;
         }
+
+        public override void Insert(DVDTag obj)
+        {
+            string newId = objConnect.GetNewID();
+            obj.Id = newId;
+            InsertParameters.Add("@1", newId);
+            InsertParameters.Add("@2", obj.Name);
+            InsertParameters.Add("@3", obj.Category);
+            base.Insert(obj);
+        }
+
+        public override void Update(DVDTag obj)
+        {
+            UpdateParameters.Add("@1", obj.Id);
+            UpdateParameters.Add("@2", obj.Name);
+            UpdateParameters.Add("@3", obj.Category);
+            UpdateParameters.Add("@4", obj.Id);
+            base.Update(obj);
+        }
+
+        override protected void initFindAllSQL()
+        {
+            findAllSQL = " SELECT * FROM Tags WHERE Category = @1 ORDER BY Name ";
+        }
+
+
     }
 }
