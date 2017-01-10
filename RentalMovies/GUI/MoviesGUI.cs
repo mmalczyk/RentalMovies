@@ -52,8 +52,8 @@ namespace RentalMovies
 
         private void Correction()
         {
-            this.objConnect.Sql = Properties.Settings.Default.SelectAllFromMovies;
-            System.Data.DataSet dataSet = objConnect.GetDataSet();
+            objConnect.Sql = Properties.Settings.Default.SelectAllFromMovies;
+            DataSet dataSet = objConnect.GetDataSet();
             var rows = dataSet.Tables[0].Rows;
             foreach (DataRow row in rows)
             {
@@ -75,7 +75,7 @@ namespace RentalMovies
             MoviesListView.Columns.Add("Tytuł", -2, HorizontalAlignment.Left);
             MoviesListView.Columns.Add("Premiera", -2, HorizontalAlignment.Left);
             MoviesListView.Columns.Add("Reżyser", -2, HorizontalAlignment.Left);
-            this.FillMoviesList(Properties.Settings.Default.SelectAllFromMovies);
+            FillMoviesList(Properties.Settings.Default.SelectAllFromMovies);
 
             GenreListView.View = View.Details;
             GenreListView.Columns.Add("Genre", -2, HorizontalAlignment.Center);
@@ -89,25 +89,25 @@ namespace RentalMovies
             DVDListView.Columns[0].Width = 80;
             DVDListView.Columns[1].Width = 120;
 
-            this.ResizeListViews();
+            ResizeListViews();
         }
 
         private string GetTagName(string movieid)
         {
-            this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Writer");
-            System.Data.DataSet dataSet = objConnect.GetDataSet();
+            objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Writer");
+            DataSet dataSet = objConnect.GetDataSet();
             var rows = dataSet.Tables[0].Rows;
             if (rows.Count == 0) return "";
-            else return this.objConnect.GetValue(dataSet.Tables[0].Rows[0], 1);
+            else return objConnect.GetValue(dataSet.Tables[0].Rows[0], 1);
         }
 
         private void FillMoviesList(String c)
         {
             try
             {
-                this.currentSql = c;
-                this.objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedRadioButton();
-                System.Data.DataSet dataSet = objConnect.GetDataSet();
+                currentSql = c;
+                objConnect.Sql = c + Properties.Settings.Default.OrderBy + this.FindCheckedRadioButton();
+                DataSet dataSet = objConnect.GetDataSet();
                 var MoviesList = dataSet.Tables[0].Rows;
 
                 MoviesListView.Items.Clear();
@@ -124,11 +124,11 @@ namespace RentalMovies
         {
             try
             {
-                this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Genre");
-                System.Data.DataSet dataSet = objConnect.GetDataSet();
+                objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Genre");
+                DataSet dataSet = objConnect.GetDataSet();
                 var GenreList = dataSet.Tables[0].Rows;
                 GenreListView.Items.Clear();
-                foreach (DataRow row in GenreList) this.GenreListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 1), objConnect.GetValue(row, 0) }));
+                foreach (DataRow row in GenreList) GenreListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 1), objConnect.GetValue(row, 0) }));
                 ResizeListViews();
             }
             catch (Exception err)
@@ -141,11 +141,11 @@ namespace RentalMovies
         {
             try
             {
-                this.objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Actor");
-                System.Data.DataSet dataSet = objConnect.GetDataSet();
+                objConnect.Sql = Properties.Settings.Default.SelectTagsByMovieId.Replace("[id]", movieid).Replace("[category]", "Actor");
+                DataSet dataSet = objConnect.GetDataSet();
                 var ActorsList = dataSet.Tables[0].Rows;
                 ActorsListView.Items.Clear();
-                foreach (DataRow row in ActorsList) this.ActorsListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 1), objConnect.GetValue(row, 0) }));
+                foreach (DataRow row in ActorsList) ActorsListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 1), objConnect.GetValue(row, 0) }));
                 ResizeListViews();
             }
             catch (Exception err)
@@ -158,8 +158,8 @@ namespace RentalMovies
         {
             try
             {
-                this.objConnect.Sql = Properties.Settings.Default.SelectDVDByMovieId.Replace("[id]", movieid);
-                System.Data.DataSet dataSet = objConnect.GetDataSet();
+                objConnect.Sql = Properties.Settings.Default.SelectDVDByMovieId.Replace("[id]", movieid);
+                DataSet dataSet = objConnect.GetDataSet();
                 var DVDList = dataSet.Tables[0].Rows;
                 DVDListView.Items.Clear();
                 foreach (DataRow row in DVDList) this.DVDListView.Items.Add(new ListViewItem(new[] { objConnect.GetValue(row, 0), objConnect.GetValue(row, 2) }));
@@ -208,13 +208,18 @@ namespace RentalMovies
             AvailableTextBox.Clear();
 
             FillMoviesList(Properties.Settings.Default.SelectAllFromMovies);
+
+            GenreListView.Items.Clear();
+            ActorsListView.Items.Clear();
+            DVDListView.Items.Clear();
+
         }
 
         private void MoviesListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             try
             {
-                var listItem = this.MoviesListView.SelectedItems;
+                var listItem = MoviesListView.SelectedItems;
                 if (listItem != null && listItem.Count > 0)
                 {
                     FillTextBoxes(listItem[0].Text);
@@ -233,8 +238,8 @@ namespace RentalMovies
         {
             try
             {
-                this.objConnect.Sql = Properties.Settings.Default.SelectMovieByID.Replace("[id]", movieid);
-                System.Data.DataSet dataSet = objConnect.GetDataSet();
+                objConnect.Sql = Properties.Settings.Default.SelectMovieByID.Replace("[id]", movieid);
+                DataSet dataSet = objConnect.GetDataSet();
                 DataRow row = dataSet.Tables[0].Rows[0];
                 TitleTextBox.Text = objConnect.GetValue(row, 1);
                 ReleaseYearTextBox.Text = objConnect.GetValue(row, 2);
@@ -244,7 +249,7 @@ namespace RentalMovies
                 CostTextBox.Text = objConnect.GetValue(row, 4);
                 BorrowedTextBox.Text = GetDVDCount("Pozyczony", movieid);
                 AvailableTextBox.Text = GetDVDCount("Dostepny", movieid); 
-                this.ResizeListViews();
+                ResizeListViews();
             }
             catch (Exception f)
             {
@@ -254,38 +259,38 @@ namespace RentalMovies
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            this.ResetMovies();
+            ResetMovies();
         }
 
         private void SortByNameAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillMoviesList(currentSql);
+            FillMoviesList(currentSql);
         }
 
         private void SortByNameDesc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillMoviesList(currentSql);
+            FillMoviesList(currentSql);
         }
 
         private void SortBySurnameAsc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillMoviesList(currentSql);
+            FillMoviesList(currentSql);
         }
 
         private void SortBySurnameDesc_CheckedChanged(object sender, EventArgs e)
         {
-            this.FillMoviesList(currentSql);
+            FillMoviesList(currentSql);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            if (this.MoviesIsCorrect() == false) MessageBox.Show("Błędnie wypełniony rekord");
+            if (MoviesIsCorrect() == false) MessageBox.Show("Błędnie wypełniony rekord");
             else
             {
                 try
                 {
-                    this.objConnect.Sql = Properties.Settings.Default.SelectAllFromMovies;
-                    System.Data.DataSet dataSet = objConnect.GetDataSet();
+                    objConnect.Sql = Properties.Settings.Default.SelectAllFromMovies;
+                    DataSet dataSet = objConnect.GetDataSet();
                     var dataTable = dataSet.Tables[0];
                     var row = dataTable.NewRow();
                     row[0] = objConnect.GetNewID();
@@ -296,9 +301,9 @@ namespace RentalMovies
                     row[5] = DescriptionTextBox.Text;
                     dataTable.Rows.Add(row);
                     objConnect.UpdateDatabase(dataSet);
-                    this.ResizeListViews();
-                    this.FillMoviesList(Properties.Settings.Default.SelectAllFromMovies);
-                    this.ResizeListViews();
+                    ResizeListViews();
+                    FillMoviesList(Properties.Settings.Default.SelectAllFromMovies);
+                    ResizeListViews();
                 }
                 catch (Exception f)
                 {

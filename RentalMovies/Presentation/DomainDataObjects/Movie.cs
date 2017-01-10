@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RentalMovies.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace RentalMovies.Domain.Records
         private string title;
         private string releaseYear;
         private string country;
-        private string cost;
+        private Money cost;
         private string description;
 
         public string Title
@@ -54,7 +55,7 @@ namespace RentalMovies.Domain.Records
             }
         }
 
-        public string Cost
+        public Money Cost
         {
             get
             {
@@ -80,6 +81,8 @@ namespace RentalMovies.Domain.Records
             }
         }
 
+        public object MapperUtils { get; private set; }
+
         public Movie()
         {
             DataObjectType = DataObjectType.Movie;
@@ -87,7 +90,7 @@ namespace RentalMovies.Domain.Records
 
         public override string[] toArray()
         {
-            return new string[] { Id, Title, ReleaseYear, Country, Cost, Description };
+            return new string[] { Id, Title, ReleaseYear, Country, Cost.ToString(), Description };
         }
 
         public override void init(DataRow row)
@@ -96,7 +99,7 @@ namespace RentalMovies.Domain.Records
             Title = row.ItemArray.GetValue(1).ToString().Trim();
             ReleaseYear = row.ItemArray.GetValue(2).ToString().Trim();
             Country = row.ItemArray.GetValue(3).ToString().Trim();
-            Cost = row.ItemArray.GetValue(4).ToString().Trim();
+            Cost = new Money(row.ItemArray.GetValue(4).ToString().Trim(), Currency.PL);
             Description = row.ItemArray.GetValue(5).ToString().Trim();
         }
 

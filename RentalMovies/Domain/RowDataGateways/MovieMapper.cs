@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using RentalMovies.HelperClasses;
 
 namespace RentalMovies.Domain.Mapper
 {
@@ -22,7 +23,7 @@ namespace RentalMovies.Domain.Mapper
             obj.Title = MapperUtils.GetValue(row, 1);
             obj.ReleaseYear = MapperUtils.GetValue(row, 2);
             obj.Country = MapperUtils.GetValue(row, 3);
-            obj.Cost = MapperUtils.GetValue(row, 4);
+            obj.Cost = new Money(MapperUtils.GetValue(row, 4), Currency.PL);
             obj.Description = MapperUtils.GetValue(row, 5);
             return obj;
         }
@@ -55,7 +56,7 @@ namespace RentalMovies.Domain.Mapper
             InsertParameters.Add("@2", obj.Title);
             InsertParameters.Add("@3", obj.ReleaseYear);
             InsertParameters.Add("@4", obj.Country);
-            InsertParameters.Add("@5", obj.Cost);
+            InsertParameters.Add("@5", obj.Cost.ToString());
             InsertParameters.Add("@6", obj.Description);
             base.Insert(obj);
         }
@@ -66,7 +67,7 @@ namespace RentalMovies.Domain.Mapper
             UpdateParameters.Add("@2", obj.Title);
             UpdateParameters.Add("@3", obj.ReleaseYear);
             UpdateParameters.Add("@4", obj.Country);
-            UpdateParameters.Add("@5", obj.Cost);
+            UpdateParameters.Add("@5", obj.Cost.ToString());
             UpdateParameters.Add("@6", obj.Description);
             UpdateParameters.Add("@7", obj.Id);
             base.Update(obj);

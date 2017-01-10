@@ -1,1 +1,1 @@
-SELECT * FROM Customers WHERE customerId=?
+SELECT * FROM Customers WHERE id=?

@@ -1,1 +1,1 @@
-SELECT * FROM Movies WHERE moviesid = (SELECT movieid FROM DVDs WHERE dvdid = ?)
+SELECT * FROM Movies WHERE id = (SELECT movieid FROM DVDs WHERE id = ?)

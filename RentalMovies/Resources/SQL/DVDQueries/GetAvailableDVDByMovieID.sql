@@ -1,1 +1,1 @@
-SELECT dvdid FROM DVDs WHERE status = "Dostepny" AND movieid = ?
+SELECT id FROM DVDs WHERE status = "Dostepny" AND movieid = ?

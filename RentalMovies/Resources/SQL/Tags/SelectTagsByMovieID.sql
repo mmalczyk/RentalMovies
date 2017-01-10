@@ -1,5 +1,5 @@
 SELECT * from Tags
-WHERE tagId IN
+WHERE id IN
 (
 	SELECT tagId
 	FROM MoviesTags

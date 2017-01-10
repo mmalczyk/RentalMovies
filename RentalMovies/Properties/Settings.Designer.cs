@@ -25,15 +25,6 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Users WHERE login=\'[login]\' AND password=\'[password]\';")]
-        public string SelectUser {
-            get {
-                return ((string)(this["SelectUser"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(" ORDER BY ")]
         public string OrderBy {
             get {
@@ -61,7 +52,7 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Tags WHERE tagId = \'[id]\'")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Tags WHERE id = \'[id]\'")]
         public string SelectTagByID {
             get {
                 return ((string)(this["SelectTagByID"]));
@@ -70,7 +61,7 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Customers WHERE customerId=\'[id]\' ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Customers WHERE id=\'[id]\' ")]
         public string SelectCustomerByID {
             get {
                 return ((string)(this["SelectCustomerByID"]));
@@ -88,9 +79,9 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Customers WHERE forename LIKE \'%[name]%\' AND surname LIKE \'%[surnam" +
-            "e]%\' and pesel LIKE \'%[pesel]%\' and phone like \'%[phone]%\' and address like \'%[a" +
-            "ddress]%\' ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Customers WHERE name LIKE \'%[name]%\' AND surname LIKE \'%[surname]%\'" +
+            " and pesel LIKE \'%[pesel]%\' and phone like \'%[phone]%\' and address like \'%[addre" +
+            "ss]%\' ")]
         public string SearchCustomers {
             get {
                 return ((string)(this["SearchCustomers"]));
@@ -108,7 +99,7 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Movies WHERE moviesId=\'[id]\' ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Movies WHERE id=\'[id]\' ")]
         public string SelectMovieByID {
             get {
                 return ((string)(this["SelectMovieByID"]));
@@ -136,8 +127,8 @@ namespace RentalMovies.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * from Tags WHERE tagId IN (SELECT tagId FROM MoviesTags WHERE movieId = \'" +
-            "[id]\') AND category = \'[category]\'")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * from Tags WHERE id IN (SELECT tagId FROM MoviesTags WHERE movieId = \'[id" +
+            "]\') AND category = \'[category]\'")]
         public string SelectTagsByMovieId {
             get {
                 return ((string)(this["SelectTagsByMovieId"]));
@@ -160,9 +151,9 @@ WHERE
 title LIKE '%[title]%' AND
 releaseYear LIKE '%[year]%' AND
 country LIKE '%[country]%' AND
-(('%[director]%' = '%%' OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[director]%' AND category = 'Writer'))) AND
-('%[genre]%' = '%%' OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[genre]%' AND category = 'Genre'))) AND
-('%[actor]%' = '%%' OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[actor]%' AND category = 'Actor'))))")]
+(('%[director]%' = '%%' OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[director]%' AND category = 'Writer'))) AND
+('%[genre]%' = '%%' OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[genre]%' AND category = 'Genre'))) AND
+('%[actor]%' = '%%' OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[actor]%' AND category = 'Actor'))))")]
         public string SearchMoviesWithTheseTags {
             get {
                 return ((string)(this["SearchMoviesWithTheseTags"]));
@@ -171,8 +162,7 @@ country LIKE '%[country]%' AND
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * from DVDs WHERE dvdid IN (SELECT dvdid FROM DVDs WHERE movieId = \'[id]\')" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * from DVDs WHERE id IN (SELECT id FROM DVDs WHERE movieId = \'[id]\')")]
         public string SelectDVDByMovieId {
             get {
                 return ((string)(this["SelectDVDByMovieId"]));
@@ -190,7 +180,7 @@ country LIKE '%[country]%' AND
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM DVDs WHERE dvdid = \'[id]\' ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM DVDs WHERE id = \'[id]\' ")]
         public string SelectDVDsById {
             get {
                 return ((string)(this["SelectDVDsById"]));
@@ -226,7 +216,7 @@ country LIKE '%[country]%' AND
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT dvdid FROM DVDs WHERE status = \'Dostepny\' AND movieid = \'[id]\' ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT id FROM DVDs WHERE status = \'Dostepny\' AND movieid = \'[id]\' ")]
         public string GetAvailableDVDByMovieId {
             get {
                 return ((string)(this["GetAvailableDVDByMovieId"]));
@@ -244,8 +234,7 @@ country LIKE '%[country]%' AND
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Movies WHERE moviesid = (SELECT movieid FROM DVDs WHERE dvdid = \'[i" +
-            "d]\')")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Movies WHERE id = (SELECT movieid FROM DVDs WHERE id = \'[id]\')")]
         public string GetMovieTitle {
             get {
                 return ((string)(this["GetMovieTitle"]));

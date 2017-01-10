@@ -1,1 +1,1 @@
-SELECT * FROM Movies WHERE moviesId=?
+SELECT * FROM Movies WHERE id=?

@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RentalMovies.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="SelectUser" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Users WHERE login='[login]' AND password='[password]';</Value>
-    </Setting>
     <Setting Name="OrderBy" Type="System.String" Scope="Application">
       <Value Profile="(Default)"> ORDER BY </Value>
     </Setting>
@@ -15,22 +12,22 @@
       <Value Profile="(Default)">SELECT * FROM Tags WHERE category = '[category]' ORDER BY name ASC</Value>
     </Setting>
     <Setting Name="SelectTagByID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Tags WHERE tagId = '[id]'</Value>
+      <Value Profile="(Default)">SELECT * FROM Tags WHERE id = '[id]'</Value>
     </Setting>
     <Setting Name="SelectCustomerByID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Customers WHERE customerId='[id]' </Value>
+      <Value Profile="(Default)">SELECT * FROM Customers WHERE id='[id]' </Value>
     </Setting>
     <Setting Name="SelectAllFromCustomers" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM Customers </Value>
     </Setting>
     <Setting Name="SearchCustomers" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Customers WHERE forename LIKE '%[name]%' AND surname LIKE '%[surname]%' and pesel LIKE '%[pesel]%' and phone like '%[phone]%' and address like '%[address]%' </Value>
+      <Value Profile="(Default)">SELECT * FROM Customers WHERE name LIKE '%[name]%' AND surname LIKE '%[surname]%' and pesel LIKE '%[pesel]%' and phone like '%[phone]%' and address like '%[address]%' </Value>
     </Setting>
     <Setting Name="SelectAllFromMovies" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM Movies </Value>
     </Setting>
     <Setting Name="SelectMovieByID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Movies WHERE moviesId='[id]' </Value>
+      <Value Profile="(Default)">SELECT * FROM Movies WHERE id='[id]' </Value>
     </Setting>
     <Setting Name="SearchTags" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM Tags WHERE name LIKE '%[name]%' AND category = '[category]' ORDER BY name ASC</Value>
@@ -39,7 +36,7 @@
       <Value Profile="(Default)">SELECT * FROM MoviesTags</Value>
     </Setting>
     <Setting Name="SelectTagsByMovieId" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * from Tags WHERE tagId IN (SELECT tagId FROM MoviesTags WHERE movieId = '[id]') AND category = '[category]'</Value>
+      <Value Profile="(Default)">SELECT * from Tags WHERE id IN (SELECT tagId FROM MoviesTags WHERE movieId = '[id]') AND category = '[category]'</Value>
     </Setting>
     <Setting Name="SelectMoviesTagsByTagID" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM MoviesTags WHERE tagId = '[id]'</Value>
@@ -50,18 +47,18 @@ WHERE
 title LIKE '%[title]%' AND
 releaseYear LIKE '%[year]%' AND
 country LIKE '%[country]%' AND
-(('%[director]%' = '%%' OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[director]%' AND category = 'Writer'))) AND
-('%[genre]%' = '%%' OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[genre]%' AND category = 'Genre'))) AND
-('%[actor]%' = '%%' OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[actor]%' AND category = 'Actor'))))</Value>
+(('%[director]%' = '%%' OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[director]%' AND category = 'Writer'))) AND
+('%[genre]%' = '%%' OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[genre]%' AND category = 'Genre'))) AND
+('%[actor]%' = '%%' OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[actor]%' AND category = 'Actor'))))</Value>
     </Setting>
     <Setting Name="SelectDVDByMovieId" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * from DVDs WHERE dvdid IN (SELECT dvdid FROM DVDs WHERE movieId = '[id]')</Value>
+      <Value Profile="(Default)">SELECT * from DVDs WHERE id IN (SELECT id FROM DVDs WHERE movieId = '[id]')</Value>
     </Setting>
     <Setting Name="SelectAllDVDs" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Select * FROM DVDs </Value>
     </Setting>
     <Setting Name="SelectDVDsById" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM DVDs WHERE dvdid = '[id]' </Value>
+      <Value Profile="(Default)">SELECT * FROM DVDs WHERE id = '[id]' </Value>
     </Setting>
     <Setting Name="CountDVDsByStatus" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT COUNT(*) FROM DVDs WHERE movieid = '[id]' AND status = '[status]' </Value>
@@ -73,13 +70,13 @@ country LIKE '%[country]%' AND
       <Value Profile="(Default)">SELECT * FROM RentingRecord WHERE customerid = '[id]'</Value>
     </Setting>
     <Setting Name="GetAvailableDVDByMovieId" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT dvdid FROM DVDs WHERE status = 'Dostepny' AND movieid = '[id]' </Value>
+      <Value Profile="(Default)">SELECT id FROM DVDs WHERE status = 'Dostepny' AND movieid = '[id]' </Value>
     </Setting>
     <Setting Name="GetAllRentingRecord" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM RentingRecord</Value>
     </Setting>
     <Setting Name="GetMovieTitle" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SELECT * FROM Movies WHERE moviesid = (SELECT movieid FROM DVDs WHERE dvdid = '[id]')</Value>
+      <Value Profile="(Default)">SELECT * FROM Movies WHERE id = (SELECT movieid FROM DVDs WHERE id = '[id]')</Value>
     </Setting>
     <Setting Name="GetTransactionById" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM RentingRecord WHERE id = [id]</Value>

@@ -61,15 +61,6 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT COUNT(*) FROM DVDs WHERE movieid = ? AND status = ?.
-        /// </summary>
-        internal static string CountDVDsByStatus {
-            get {
-                return ResourceManager.GetString("CountDVDsByStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Database {
@@ -89,7 +80,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT dvdid FROM DVDs WHERE status = &quot;Dostepny&quot; AND movieid = ?.
+        ///   Looks up a localized string similar to SELECT id FROM DVDs WHERE status = &quot;Dostepny&quot; AND movieid = ?.
         /// </summary>
         internal static string GetAvailableDVDByMovieID {
             get {
@@ -107,7 +98,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Movies WHERE moviesid = (SELECT movieid FROM DVDs WHERE dvdid = ?)
+        ///   Looks up a localized string similar to SELECT * FROM Movies WHERE id = (SELECT movieid FROM DVDs WHERE id = ?)
         ///.
         /// </summary>
         internal static string GetMovieTitle {
@@ -154,7 +145,7 @@ namespace RentalMovies.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to SELECT * FROM Customers
-        ///WHERE forename
+        ///WHERE name
         ///	LIKE ? AND surname LIKE ?
         ///	AND pesel LIKE ?
         ///	AND phone LIKE ?
@@ -174,9 +165,9 @@ namespace RentalMovies.Properties {
         ///AND country LIKE ?
         ///AND
         ///(
-        ///	(&apos;%[director]%&apos; = ? OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE &apos;%[director]%&apos; AND category = &apos;Writer&apos;)))
-        ///	AND (&apos;%[genre]%&apos; = ? OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE &apos;%[genre]%&apos; AND category = &apos;Genre&apos;)))
-        ///	AND (&apos;%[actor]%&apos; = ? OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (S [rest of string was truncated]&quot;;.
+        ///	(&apos;%[director]%&apos; = ? OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE &apos;%[director]%&apos; AND category = &apos;Writer&apos;)))
+        ///	AND (&apos;%[genre]%&apos; = ? OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE &apos;%[genre]%&apos; AND category = &apos;Genre&apos;)))
+        ///	AND (&apos;%[actor]%&apos; = ? OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SearchMoviesWithTheseTags {
             get {
@@ -248,7 +239,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Customers WHERE customerId=?.
+        ///   Looks up a localized string similar to SELECT * FROM Customers WHERE id=?.
         /// </summary>
         internal static string SelectCustomerById {
             get {
@@ -257,7 +248,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * from DVDs WHERE dvdid IN (SELECT dvdid FROM DVDs WHERE movieId = ?).
+        ///   Looks up a localized string similar to SELECT * from DVDs WHERE id IN (SELECT id FROM DVDs WHERE movieId = ?).
         /// </summary>
         internal static string SelectDVDByMovieID {
             get {
@@ -266,7 +257,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM DVDs WHERE dvdid = ?.
+        ///   Looks up a localized string similar to SELECT * FROM DVDs WHERE id = ?.
         /// </summary>
         internal static string SelectDVDsByID {
             get {
@@ -275,7 +266,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Movies WHERE moviesId=?.
+        ///   Looks up a localized string similar to SELECT * FROM Movies WHERE id=?.
         /// </summary>
         internal static string SelectMovieByID {
             get {
@@ -302,7 +293,7 @@ namespace RentalMovies.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM Tags WHERE tagId = @id.
+        ///   Looks up a localized string similar to SELECT * FROM Tags WHERE id = @id.
         /// </summary>
         internal static string SelectTagByID {
             get {
@@ -312,7 +303,7 @@ namespace RentalMovies.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to SELECT * from Tags
-        ///WHERE tagId IN
+        ///WHERE id IN
         ///(
         ///	SELECT tagId
         ///	FROM MoviesTags

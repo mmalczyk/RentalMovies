@@ -1,1 +1,1 @@
-SELECT * from DVDs WHERE dvdid IN (SELECT dvdid FROM DVDs WHERE movieId = ?)
+SELECT * from DVDs WHERE id IN (SELECT id FROM DVDs WHERE movieId = ?)

@@ -1,1 +1,1 @@
-SELECT * FROM DVDs WHERE dvdid = ?
+SELECT * FROM DVDs WHERE id = ?

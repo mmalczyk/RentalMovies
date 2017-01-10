@@ -55,8 +55,8 @@ namespace RentalMovies
 
         private string FindCheckedRadioButton()
         {
-            if (SortByNameAsc.Checked == true) return "forename ASC";
-            if (SortByNameDesc.Checked == true) return "forename DESC";
+            if (SortByNameAsc.Checked == true) return "name ASC";
+            if (SortByNameDesc.Checked == true) return "name DESC";
             if (SortBySurnameAsc.Checked == true) return "surname ASC";
             if (SortBySurnameDesc.Checked == true) return "surname DESC";
             return "surname ASC";
@@ -86,7 +86,7 @@ namespace RentalMovies
             SortBySurnameAsc.Checked = false;
             SortBySurnameDesc.Checked = false;
 
-            FillTextBoxes(Properties.Settings.Default.SelectAllFromCustomers);
+            FillCustomerList(Properties.Settings.Default.SelectAllFromCustomers);
         }
 
         private void CustomersListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)

@@ -1,5 +1,5 @@
 SELECT * FROM Customers
-WHERE forename
+WHERE name
 	LIKE ? AND surname LIKE ?
 	AND pesel LIKE ?
 	AND phone LIKE ?

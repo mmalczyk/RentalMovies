@@ -47,24 +47,12 @@ namespace RentalMovies
                 {
                     user = usersTable.FindUser(user.Login, CurrentPasswordTextBox.Text);
 
-                    /*
-                    objConnect.Sql = Properties.Settings.Default.SelectUser.Replace("[password]", CurrentPasswordTextBox.Text).Replace("[login]", user.Login);
-                    System.Data.DataSet dataSet = objConnect.GetDataSet();
-                    if (dataSet.Tables[0].Rows.Count == 0) PasswordChangeLabel.Text = "Błędne stare hasło";
-                    */
                     if (user == null)
                         PasswordChangeLabel.Text = "Błędne stare hasło";
                     else
                     {
                         user.Password = NewPasswordTextBox.Text;
                         usersTable.Update(user);
-                        /*
-                        var dataRow = dataSet.Tables[0].Rows[0];
-                        dataRow.BeginEdit();
-                        dataRow[4] = NewPasswordTextBox.Text;
-                        dataRow.EndEdit();
-                        objConnect.UpdateDatabase(dataSet);
-                        */
                         PasswordChangeLabel.Text = "";
                         CurrentPasswordTextBox.Text = "";
                         NewPasswordTextBox.Text = "";

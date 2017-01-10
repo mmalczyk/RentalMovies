@@ -5,7 +5,7 @@ AND releaseYear LIKE ?
 AND country LIKE ?
 AND
 (
-	('%[director]%' = ? OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[director]%' AND category = 'Writer')))
-	AND ('%[genre]%' = ? OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[genre]%' AND category = 'Genre')))
-	AND ('%[actor]%' = ? OR moviesId IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT tagId FROM Tags WHERE name LIKE '%[actor]%' AND category = 'Actor')))
+	('%[director]%' = ? OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[director]%' AND category = 'Writer')))
+	AND ('%[genre]%' = ? OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[genre]%' AND category = 'Genre')))
+	AND ('%[actor]%' = ? OR id IN (SELECT movieid FROM MoviesTags WHERE tagId IN (SELECT id FROM Tags WHERE name LIKE '%[actor]%' AND category = 'Actor')))
 )
