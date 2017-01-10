@@ -34,8 +34,13 @@ namespace RentalMovies.Domain.Records
 
             set
             {
-                forename = value;
+                setName(value);
             }
+        }
+
+        public virtual void setName(string value)
+        {
+            forename = value;
         }
 
         public string Login
@@ -47,8 +52,13 @@ namespace RentalMovies.Domain.Records
 
             set
             {
-                login = value;
+                setLogin(value);
             }
+        }
+
+        public virtual void setLogin(string value)
+        {
+            login = value;
         }
 
         public string Password
@@ -60,8 +70,13 @@ namespace RentalMovies.Domain.Records
 
             set
             {
-                password = value;
+                setPassword(value);
             }
+        }
+
+        public virtual void setPassword(string value)
+        {
+            password = value;
         }
 
         public string Surname
@@ -73,8 +88,13 @@ namespace RentalMovies.Domain.Records
 
             set
             {
-                surname = value;
+                setSurname(value);
             }
+        }
+
+        public virtual void setSurname(string value)
+        {
+            surname = value;
         }
 
         public string Job
@@ -86,8 +106,13 @@ namespace RentalMovies.Domain.Records
 
             set
             {
-                job = value;
+                setJob(value);
             }
+        }
+
+        public virtual void setJob(string value)
+        {
+            job = value;
         }
 
         public bool Blocked
@@ -164,7 +189,7 @@ namespace RentalMovies.Domain.Records
 
         //sprawdza poprawność przed update, w wypadku błędów nie dokonuje aktualizacji
         //komunikat błędu dostępny w this.ErrorMessage        
-        public User Update(string forename, string surname, string login, string role)
+        public virtual User Update(string forename, string surname, string login, string role)
         {
             this.Name = forename.Trim();
             this.Surname = surname.Trim();
@@ -176,7 +201,7 @@ namespace RentalMovies.Domain.Records
 
         //sprawdza poprawność przed update, w wypadku błędów nie dokonuje aktualizacji
         //komunikat błędu dostępny w this.ErrorMessage
-        public User ChangePassword(string password)
+        public virtual User ChangePassword(string password)
         {
             this.CheckPassword(password);
             //this.Password = System.Text.Encoding.Unicode.GetBytes(password.Trim());

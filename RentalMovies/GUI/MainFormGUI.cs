@@ -5,6 +5,7 @@ using RentalMovies.Domain.Records;
 using RentalMovies.Domain.Mapper;
 using RentalMovies.Domain;
 using RentalMovies.Domain.Tables;
+using RentalMovies.Presentation.DomainDataObjects;
 
 namespace RentalMovies
 {
@@ -51,7 +52,7 @@ namespace RentalMovies
         public MainForm()
         {
             InitializeComponent();
-
+            user = new AnonymousUser();
             usersTable = new UsersTable();
         }
 
@@ -79,65 +80,84 @@ namespace RentalMovies
             logoutButton.Enabled = false;
         }
 
+        private void isSpecialUser(string login, string password)
+        {
+            
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
             try
             {
-                user = usersTable.FindUser(loginTextBox.Text, passwordTextBox.Text);
-                if (user == null)
+                if (user.Name.Equals(loginTextBox.Text))
                 {
-                    //Próba zalogowania odrzucona
-                    loginErrorLabel.Text = "Błędny login lub hasło";
+                    MoviesButton.Enabled = true;
+                    CustomersButton.Enabled = true;
+                    TagsButton.Enabled = true;
+                    UsersButton.Enabled = true;
+                    AdministrationButton.Enabled = true;
+                    MyAccountButton.Enabled = true;
+
                 }
                 else
                 {
-                    loginErrorLabel.Text = "";
-                    loginTextBox.Text = "";
-                    passwordTextBox.Text = "";
-                    loginTextBox.Enabled = false;
-                    passwordTextBox.Enabled = false;
-                    loginButton.Enabled = false;
-                    logoutButton.Enabled = true;
+                    user = usersTable.FindUser(loginTextBox.Text, passwordTextBox.Text);
+                    if (user == null)
+                    {
+                        //Próba zalogowania odrzucona
+                        loginErrorLabel.Text = "Błędny login lub hasło";
+                    }
+                    else
+                    {
+                        loginErrorLabel.Text = "";
+                        loginTextBox.Text = "";
+                        passwordTextBox.Text = "";
+                        loginTextBox.Enabled = false;
+                        passwordTextBox.Enabled = false;
+                        loginButton.Enabled = false;
+                        logoutButton.Enabled = true;
 
-                    //Zalogowany; przydzielanie uprawnień
-                    if (user.Job.CompareTo("Edytor") == 0)
-                    {
-                        MoviesButton.Enabled = true;
-                        CustomersButton.Enabled = false;
-                        TagsButton.Enabled = true;
-                        UsersButton.Enabled = false;
-                        AdministrationButton.Enabled = false;
-                        MyAccountButton.Enabled = true;
-                    }
-                    if (user.Job.CompareTo("Kasjer") == 0)
-                    {
-                        MoviesButton.Enabled = true;
-                        CustomersButton.Enabled = true;
-                        TagsButton.Enabled = false;
-                        UsersButton.Enabled = false;
-                        AdministrationButton.Enabled = false;
-                        MyAccountButton.Enabled = true;
+                        //Zalogowany; przydzielanie uprawnień
+                        if (user.Job.CompareTo("Edytor") == 0)
+                        {
+                            MoviesButton.Enabled = true;
+                            CustomersButton.Enabled = false;
+                            TagsButton.Enabled = true;
+                            UsersButton.Enabled = false;
+                            AdministrationButton.Enabled = false;
+                            MyAccountButton.Enabled = true;
+                        }
+                        else if (user.Job.CompareTo("Kasjer") == 0)
+                        {
+                            MoviesButton.Enabled = true;
+                            CustomersButton.Enabled = true;
+                            TagsButton.Enabled = false;
+                            UsersButton.Enabled = false;
+                            AdministrationButton.Enabled = false;
+                            MyAccountButton.Enabled = true;
 
-                    }
-                    if (user.Job.CompareTo("Manager") == 0)
-                    {
-                        MoviesButton.Enabled = true;
-                        CustomersButton.Enabled = true;
-                        TagsButton.Enabled = true;
-                        UsersButton.Enabled = false;
-                        AdministrationButton.Enabled = true;
-                        MyAccountButton.Enabled = true;
+                        }
+                        else if (user.Job.CompareTo("Manager") == 0)
+                        {
+                            MoviesButton.Enabled = true;
+                            CustomersButton.Enabled = true;
+                            TagsButton.Enabled = true;
+                            UsersButton.Enabled = false;
+                            AdministrationButton.Enabled = true;
+                            MyAccountButton.Enabled = true;
 
+                        }
+                        else if (user.Job.CompareTo("Admin") == 0)
+                        {
+                            MoviesButton.Enabled = false;
+                            CustomersButton.Enabled = false;
+                            TagsButton.Enabled = false;
+                            UsersButton.Enabled = true;
+                            AdministrationButton.Enabled = false;
+                            MyAccountButton.Enabled = true;
+                        }
                     }
-                    if (user.Job.CompareTo("Admin") == 0)
-                    {
-                        MoviesButton.Enabled = false;
-                        CustomersButton.Enabled = false;
-                        TagsButton.Enabled = false;
-                        UsersButton.Enabled = true;
-                        AdministrationButton.Enabled = false;
-                        MyAccountButton.Enabled = true;
-                    }
+
                 }
             }
             catch (Exception err)

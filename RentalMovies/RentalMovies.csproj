@@ -59,18 +59,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\AbstractMapper.cs" />
+    <Compile Include="Domain\AbstractDataGateway.cs" />
     <Compile Include="Domain\DataGatewayRegistry.cs" />
     <Compile Include="Domain\Sorts\UserSort.cs" />
     <Compile Include="HelperClasses\Currency.cs" />
     <Compile Include="HelperClasses\Money.cs" />
+    <Compile Include="Presentation\DomainDataObjects\AnonymousUser.cs" />
     <Compile Include="Presentation\IdentityMap.cs" />
-    <Compile Include="Domain\RowDataGateways\CustomerMapper.cs" />
-    <Compile Include="Domain\RowDataGateways\DVDMapper.cs" />
-    <Compile Include="Domain\RowDataGateways\MovieMapper.cs" />
-    <Compile Include="Domain\RowDataGateways\RentingMapper.cs" />
-    <Compile Include="Domain\RowDataGateways\TagMapper.cs" />
-    <Compile Include="Domain\RowDataGateways\UserMapper.cs" />
+    <Compile Include="Domain\RowDataGateways\CustomerGateway.cs" />
+    <Compile Include="Domain\RowDataGateways\DVDGateway.cs" />
+    <Compile Include="Domain\RowDataGateways\MovieGateway.cs" />
+    <Compile Include="Domain\RowDataGateways\RentingGateway.cs" />
+    <Compile Include="Domain\RowDataGateways\TagGateway.cs" />
+    <Compile Include="Domain\RowDataGateways\UserGateway.cs" />
     <Compile Include="Presentation\DataObjectType.cs" />
     <Compile Include="Presentation\DomainDataObjects\DVD.cs" />
     <Compile Include="Presentation\DomainDataObjects\Renting.cs" />
